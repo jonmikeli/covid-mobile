@@ -28,9 +28,11 @@ The creative aspect of the proposed solution resides on the fact that there is n
 TODO Diagram
 
 ## Flows
+### D2C
+
 ### C2D
 
-### D2C
+
 
 ## Storage
 
