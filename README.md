@@ -30,9 +30,13 @@ TODO Diagram
 ## Flows
 ### D2C
 
+
+
 ### C2D
 
 
 
 ## Storage
+Data will be stored as raw data in cold storages.
+The used storages could feed other data lakes, analytics or any other flow meant to process and extract value.
 
