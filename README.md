@@ -29,12 +29,16 @@ TODO Diagram
 
 ## Flows
 ### D2C
-
-
+Data from the application to a given IoT Hub.
 
 ### C2D
+The type of communication between the cloud solution and the IoT client application will be:
+ - Twins (Desired, Reported Properties and Tags)
+ - Messages
+ - Commands
 
-
+Examples:
+TODO
 
 ## Storage
 Data will be stored as raw data in cold storages.
@@ -42,4 +46,4 @@ The used storages could feed other data lakes, analytics or any other flow meant
 
 # Conditions
 
-## Condtions of data usage
+## Condtions of data use
