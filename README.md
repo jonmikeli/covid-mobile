@@ -23,11 +23,14 @@ However, instead of using a regular data flow approach through APIs, queues or m
 
 The creative aspect of the proposed solution resides on the fact that there is no IoT device. That role will be played by an application embedded in a mobile application (phone application).
 
+
 ## Global architecture
 TODO Diagram
 
 ## Flows
+### C2D
 
+### D2C
 
 ## Storage
 
