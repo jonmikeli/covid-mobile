@@ -40,3 +40,6 @@ TODO Diagram
 Data will be stored as raw data in cold storages.
 The used storages could feed other data lakes, analytics or any other flow meant to process and extract value.
 
+# Conditions
+
+## Condtions of data usage
