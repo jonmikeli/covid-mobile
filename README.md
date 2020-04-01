@@ -24,7 +24,7 @@ This needs to be underlined as many times as required and all the developments h
 ## Format and structure of data
 The format of data will be JSON.
 
-Regarding its structure, ideally, a standard data schema would be nice (ex: FHIR?.
+Regarding its structure, ideally, a standard data schema would be nice (ex: FHIR related flows?).
 That said, not sure there is one for this kind of purposes. Also, we need to be very fast in all this implementation to gather pertinent data.
 
 So, let's define our schema, trying to gather the required data.
@@ -32,8 +32,17 @@ So, let's define our schema, trying to gather the required data.
 Once stored, other processes can take in charge mapping or format changing tasks.
 
 ## Solution
-The approach in mind is to use the already very extense market of cell phones all around the world.
-However, instead of using a regular data flow approach through APIs, queues or message brokers (for instance, Event Hub, Kafka), using IoT oriented services could beneficial and profitable for many use cases.
+The approach in mind is to use the very extense market of cell phones all around the world. They could behave as IoT devices through a mobile application.
+That application, in turn, will host IoT features and behave as an IoT device.
+
+
+### Why not to use a conventional solution?
+A more "classic" solution would be to develop a mobile application and make it push the data through APIs, queues or message brokers (for instance, Azure Event Hub or Kafka). This would work properly as for as concerned the purpose of gathering data.
+
+However, the solution will miss many interesting and useful IoT features. It would be unfortunate to get rid of all that having the possibility to use them.
+
+TODO: diagram
+
 
 The creative aspect of the proposed solution resides on the fact that there is no IoT device. That role will be played by an application embedded in a mobile application (phone application).
 
