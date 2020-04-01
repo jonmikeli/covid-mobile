@@ -1,7 +1,11 @@
 # Covid data gatherer
 
+COVID pandemic is world wide and the impact in all our lives is being huge.
+The sooner we stop it (or find medics), the better for all of us.
+The proposed solution is only a very small contribution in order to help the scientific community in their very hard labor from the IT world.
+
 ## Purpose
-The purpose of the project is to build a simple solution allowing to colect and gather data related to covid-19 from all around the world.
+The purpose of the project is to build a simple solution allowing to collect and gather data related to covid-19 from all around the world.
 
 Data will be related to symptoms and how people live the disease.
 
