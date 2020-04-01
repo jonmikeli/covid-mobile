@@ -87,5 +87,15 @@ Requirements (functional and planing) will allow to make the choice.
 In the same way than the previous section, it's important to keep in mind the context and the purpose of the solution.
 
 # Conditions
+The purpose of the solution is simple and clear: provide data of quality to the scientist community.
+Most important points:
+ - collect and gather data
+ - collect USEFUL data coming directly from people
+ - find a solution not intrusive but globaly expanded
+ - anonymize ALL the collected data (PRIVACY IS MANDATORY)
+
+There is no business or lucrative purpose in all this.
+This pandemic is world wide. Let's just help as we can.
 
 ## Conditions of data use
+TO BE DEFINED
