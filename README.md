@@ -1,21 +1,35 @@
 # Covid data gatherer
 
 ## Purpose
-The purpose of the project is to build a simple solution allowing to gather data related to covid-19 from all around the world.
+The purpose of the project is to build a simple solution allowing to colect and gather data related to covid-19 from all around the world.
 
 Data will be related to symptoms and how people live the disease.
-what is targetted behind is to provide to the community as much data as possible about what people has been experiencing.
 
-## Type of data
+The only target of all this is to provide to the scientific community as much data as possible about what people has been experiencing.
+
+> IMPORTANT
+> No personal data will be required and all the data will be anonymized.
+> There is no interest on tracking an individual person nor having that possibility at any given time. Privacy above all.
+
+## Type of collected data
 The type of data will be determined with doctors and/or scientists.
-At first glance we could imagine data like:
+At first sight, we could imagine data like:
  - symptoms
  - phases
  - dates
 
-Data will be anonymized to preserve intimacy.
-The idea behind is to build valuable data repositories to allow scientists in their researchs.
+As mentioned earlier, data will be anonymized to preserve privacy.
+This needs to be underlined as many times as required and all the developments have to take care of this.
 
+## Format and structure of data
+The format of data will be JSON.
+
+Regarding its structure, ideally, a standard data schema would be nice (ex: FHIR?.
+That said, not sure there is one for this kind of purposes. Also, we need to be very fast in all this implementation to gather pertinent data.
+
+So, let's define our schema, trying to gather the required data.
+
+Once stored, other processes can take in charge mapping or format changing tasks.
 
 ## Solution
 The approach in mind is to use the already very extense market of cell phones all around the world.
