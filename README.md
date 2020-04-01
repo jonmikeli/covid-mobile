@@ -72,8 +72,14 @@ Once the data is at least, at that level of persistence, we can consider other s
 The architecture of the solution would be a an IoT-oriented architecture.
 TODO Diagram
 
-# Implementation
+# 
+## IoT device application (client side)
 
+
+## IoT Solution (cloud side)
+Basically, the solution will reside on two types of implementations:
+ - SaaS or very fast solution oriented
+ - PaaS, with a bit more possibilities but will probably take longuer to be implemented
 
 
 # Conditions
