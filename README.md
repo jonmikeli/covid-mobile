@@ -43,8 +43,8 @@ However, the solution will miss many interesting and useful IoT features. It wou
 
 TODO: diagram
 
-
-The creative aspect of the proposed solution resides on the fact that there is no IoT device. That role will be played by an application embedded in a mobile application (phone application).
+### Smart IoT
+The creative aspect of the proposed solution resides on the fact that there is no IoT device. This role will be played by an application hosted in a mobile application (phone application).
 
 
 ## Global architecture
