@@ -65,7 +65,8 @@ This may allow to implemente use cases like:
 
 ### Storage
 Data will be stored as raw data in cold storages.
-The used storages could feed other data lakes, analytics or any other flow meant to process and extract value.
+
+Once the data is at least, at that level of persistence, we can consider other solutions and data flows. For instance, the used storages could feed other data lakes, analytics or any other flow meant to process (analytics) and extract value.
 
 ## Global architecture
 The architecture of the solution would be a an IoT-oriented architecture.
