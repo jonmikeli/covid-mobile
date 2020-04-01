@@ -46,15 +46,11 @@ TODO: diagram
 ### Smart IoT
 The creative aspect of the proposed solution resides on the fact that there is no IoT device. This role will be played by an application hosted in a mobile application (phone application).
 
-
-## Global architecture
-TODO Diagram
-
-## Flows
-### D2C
+### Flows
+#### D2C
 Data from the application to a given IoT Hub.
 
-### C2D
+#### C2D
 The type of communication between the cloud solution and the IoT client application will be:
  - Twins (Desired, Reported Properties and Tags)
  - Messages
@@ -63,9 +59,17 @@ The type of communication between the cloud solution and the IoT client applicat
 Examples:
 TODO
 
-## Storage
+### Storage
 Data will be stored as raw data in cold storages.
 The used storages could feed other data lakes, analytics or any other flow meant to process and extract value.
+
+## Global architecture
+The architecture of the solution would be a an IoT-oriented architecture.
+TODO Diagram
+
+# Implementation
+
+
 
 # Conditions
 
