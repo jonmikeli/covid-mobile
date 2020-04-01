@@ -90,6 +90,11 @@ Regarding the cloud IoT solution, there are two approaches:
 Requirements (functional and planing) will allow to make the choice.
 In the same way than the previous section, it's important to keep in mind the context and the purpose of the solution.
 
+# Contributions
+Feel free to take part in this.
+In order to be efficient, we need to organize the work very wisely and precisely.
+Actions will start quite soon because the context requires so. That said, don't be shy and feel free to join us whenever you feel you can.
+
 # Conditions
 The purpose of the solution is simple and clear: provide data of quality to the scientist community.
 Most important points:
