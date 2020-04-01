@@ -72,13 +72,13 @@ Once the data is at least, at that level of persistence, we can consider other s
 The architecture of the solution would be a an IoT-oriented architecture.
 TODO Diagram
 
-## IoT device application (client side)
+### IoT device application (client side)
 Mobile applications are mostly divided in iOS and Android applications.
 So, let's focus on that.
 Xamarin or similar solutions allowing to capitalize the development could be important to save time in the overall development process (factorization, tests, etc).
 Among the people that feel on this, keep in mind the purpose and I am sure wise choices will be made.
 
-## IoT Solution (cloud side)
+### IoT Solution (cloud side)
 Regarding the cloud IoT solution, there are two approaches:
  - SaaS, very fast to implement but with limitations in terms of features;
  - PaaS, with a bit more possibilities but will probably take longuer to be implemented.
