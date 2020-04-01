@@ -73,7 +73,10 @@ The architecture of the solution would be a an IoT-oriented architecture.
 TODO Diagram
 
 ## IoT device application (client side)
-
+Mobile applications are mostly divided in iOS and Android applications.
+So, let's focus on that.
+Xamarin or similar solutions allowing to capitalize the development could be important to save time in the overall development process (factorization, tests, etc).
+Among the people that feel on this, keep in mind the purpose and I am sure wise choices will be made.
 
 ## IoT Solution (cloud side)
 Basically, the solution will reside on two types of implementations:
