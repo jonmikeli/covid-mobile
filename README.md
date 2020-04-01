@@ -72,7 +72,6 @@ Once the data is at least, at that level of persistence, we can consider other s
 The architecture of the solution would be a an IoT-oriented architecture.
 TODO Diagram
 
-# 
 ## IoT device application (client side)
 
 
