@@ -79,10 +79,12 @@ Xamarin or similar solutions allowing to capitalize the development could be imp
 Among the people that feel on this, keep in mind the purpose and I am sure wise choices will be made.
 
 ## IoT Solution (cloud side)
-Basically, the solution will reside on two types of implementations:
- - SaaS or very fast solution oriented
- - PaaS, with a bit more possibilities but will probably take longuer to be implemented
+Regarding the cloud IoT solution, there are two approaches:
+ - SaaS, very fast to implement but with limitations in terms of features;
+ - PaaS, with a bit more possibilities but will probably take longuer to be implemented.
 
+Requirements (functional and planing) will allow to make the choice.
+In the same way than the previous section, it's important to keep in mind the context and the purpose of the solution.
 
 # Conditions
 
