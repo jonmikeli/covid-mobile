@@ -49,6 +49,7 @@ The creative aspect of the proposed solution resides on the fact that there is n
 ### Flows
 #### D2C
 Data from the application to a given IoT Hub.
+Once data in the IoT solution, it can follow different routes depending on the requirements we agree upon.
 
 #### C2D
 The type of communication between the cloud solution and the IoT client application will be:
@@ -56,8 +57,11 @@ The type of communication between the cloud solution and the IoT client applicat
  - Messages
  - Commands
 
-Examples:
-TODO
+This may allow to implemente use cases like:
+ - configuration changes
+ - request data
+ - request application reinitializations
+ - IoT device application updates (not mobile application updates)
 
 ### Storage
 Data will be stored as raw data in cold storages.
@@ -73,4 +77,4 @@ TODO Diagram
 
 # Conditions
 
-## Condtions of data use
+## Conditions of data use
