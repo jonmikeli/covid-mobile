@@ -75,7 +75,7 @@ Once the data is at least, at that level of persistence, we can consider other s
 ## Global architecture
 The architecture of the solution would be a an IoT-oriented architecture.
 
-![Glogal diagram](media/Global.png "Global diagram")
+![IoT solution general diagram](media/IoTSolutionGeneralDiagram.png "IoT solution general diagram")
 
 ### IoT device application (client side)
 Mobile applications are mostly divided in iOS and Android applications.
