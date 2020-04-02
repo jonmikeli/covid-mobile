@@ -45,7 +45,7 @@ A more "classic" solution would be to develop a mobile application and make it p
 
 However, the solution will miss many interesting and useful IoT features. It would be unfortunate to get rid of all that having the possibility to use them.
 
-TODO: diagram
+![Glogal diagram](media/Global.png "Global diagram")
 
 ### Smart IoT
 The creative aspect of the proposed solution resides on the fact that there is no IoT device. This role will be played by an application hosted in a mobile application (phone application).
