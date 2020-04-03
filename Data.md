@@ -30,10 +30,10 @@ Functional description:
      - Improving (boolean)     
      - Other (sring)
  - Environment:
-     - housing (string, enumeration ideally)
-     - transportation (string, enumeration ideally)
-     - location (string)
-     - social distance (enumeration, metric to define)
+     - housing (string, enumeration ideally)*
+     - transportation (string, enumeration ideally)*
+     - location (string)*
+     - social distance (enumeration, metric to define)*
  - Precautions:
      - Mask
      - Gloves
