@@ -50,6 +50,17 @@
         "authorizationPolicyOwnerName": "iothubowner"
       }
     },
+    "DPSSettings": {
+      "type": "object",
+      "defaultValue": {
+        "sku": {
+          "name": "S1",
+          "tier": "Standard",
+          "capacity": 1
+        },
+        "authorizationPolicyOwnerName": "iothubowner"
+      }
+    },
     "eventHubNamespaceSettings": {
       "type": "object",
       "defaultValue": {
@@ -378,11 +389,7 @@
       "apiVersion": "2018-01-22",
       "name": "[variables('DPSName')]",
       "location": "[parameters('location')]",
-      "sku": {
-        "name": "S1",
-        "tier": "Standard",
-        "capacity": 1
-      },
+      "sku": "[parameters('DPSSettings').sku]",
       "tags": {
         "displayName": "DPS",
         "project": "[parameters('projectProperties').name]",
