@@ -25,9 +25,7 @@
   <ItemGroup>
     <None Include="AzureCLI\0-AzFullDeployment-NotNested.sh" />
     <None Include="AzureCLI\dev.sh" />
-    <None Include="AzureCLI\int.sh" />
     <None Include="AzureFullDeploy.parameters-dev.json" />
-    <None Include="AzureFullDeploy.parameters-int.json" />
     <None Include="AzureFullDeployNotNestedARM.json" />
     <None Include="Deployment.targets">
       <Visible>False</Visible>

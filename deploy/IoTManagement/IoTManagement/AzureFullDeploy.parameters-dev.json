@@ -35,14 +35,6 @@
         }
       }
     },
-    "storageAccountAzureFunctionSettings": {
-      "value": {
-        "sku": {
-          "name": "Standard_LRS",
-          "tier": "Standard"
-        }
-      }
-    },
     "appServicePlanSettings": {
       "value": {
         "sku": {
@@ -50,17 +42,6 @@
           "tier": "Basic",
           "size": "B1",
           "family": "B",
-          "capacity": 1
-        }
-      }
-    },
-    "azureFunctionAppServicePlanSettings": {
-      "value": {
-        "sku": {
-          "name": "S1",
-          "tier": "Standard",
-          "size": "S1",
-          "family": "S",
           "capacity": 1
         }
       }
@@ -96,29 +77,6 @@
           "listen": "ListenPolicy"
         },
         "consumerGroupsDefaultName": "$Default"
-      }
-    },
-    "serviceBusNamespaceSettings": {
-      "value": {
-        "sku": {
-          "name": "Standard",
-          "tier": "Standard"
-        },
-        "authorizationRulesNames": {
-          "rootManage": "RootManagePolicy",
-          "send": "SendPolicy",
-          "listen": "ListenPolicy"
-        },
-        "queueNames": {
-          "deviceError": "deviceerror"
-        },
-        "topicNames": {
-          "data": "data",
-          "alert": "alert"
-        },
-        "topicSubscriptionNames": {
-          "default": "ApplicationSubscription"
-        }
       }
     },
     "rgName": {

@@ -487,19 +487,11 @@
             "permissions": {
               "secrets": [ "get" ]
             }
-          },
-          {
-            "tenantId": "[variables('aadTenantId')]",
-            "objectId": "[reference(resourceId('Microsoft.Web/sites', variables('azureFunctionName')), '2016-08-01', 'Full').identity.principalId]",
-            "permissions": {
-              "secrets": [ "get" ]
-            }
           }
         ]
       },
       "dependsOn": [
-        "[variables('apiName')]",
-        "[variables('azureFunctionName')]"
+        "[variables('apiName')]"
       ]
     },
     {
@@ -592,25 +584,6 @@
         "deleteRetentionPolicy": {
           "enabled": false
         }
-      }
-    },
-    {
-      "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
-      "apiVersion": "2019-06-01",
-      "name": "[concat(variables('storageAccountName'), '/default/', variables('storageAccountContainerSchemasSettings').name)]",
-      "tags": {
-        "displayName": "Azure storage-Container creation-Schemas",
-        "project": "[parameters('projectProperties').name]",
-        "feature": "[parameters('projectProperties').feature]",
-        "version": "[parameters('projectProperties').version]",
-        "environment": "[parameters('environment')]"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Storage/storageAccounts/blobServices', variables('storageAccountName'), 'default')]",
-        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
-      ],
-      "properties": {
-        "publicAccess": "[variables('storageAccountContainerSchemasSettings').publicAccess]"
       }
     },
     {
