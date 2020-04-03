@@ -402,8 +402,8 @@
         "provisioningState": "Succeeded",
         "iotHubs": [
           {
-            "connectionString": "HostName=iothubtestsedgepnp.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=****",
-            "location": "northeurope"
+            "connectionString": "[concat('HostName=', reference(resourceId('Microsoft.Devices/IoTHubs', variables('iotHubName')), providers('Microsoft.Devices', 'IoTHubs').apiVersions[0]).hostName, ';SharedAccessKeyName=iothubowner;SharedAccessKey=', listKeys(resourceId('Microsoft.Devices/IotHubs', variables('iotHubName')), providers('Microsoft.Devices', 'IoTHubs').apiVersions[0]).value[0].primaryKey)]",
+            "location": "[reference(resourceId('Microsoft.Devices/IoTHubs', variables('iotHubName')), providers('Microsoft.Devices', 'IoTHubs').apiVersions[0]).location]"
           }
         ],
         "allocationPolicy": "Hashed"
