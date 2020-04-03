@@ -50,17 +50,6 @@
         "authorizationPolicyOwnerName": "iothubowner"
       }
     },
-    "DPSSettings": {
-      "type": "object",
-      "defaultValue": {
-        "sku": {
-          "name": "S1",
-          "tier": "Standard",
-          "capacity": 1
-        },
-        "authorizationPolicyOwnerName": "iothubowner"
-      }
-    },
     "eventHubNamespaceSettings": {
       "type": "object",
       "defaultValue": {
@@ -110,15 +99,6 @@
         }
       }
     },
-    "storageAccountAzureFunctionSettings": {
-      "type": "object",
-      "defaultValue": {
-        "sku": {
-          "name": "Standard_LRS",
-          "tier": "Standard"
-        }
-      }
-    },
     "appServicePlanSettings": {
       "type": "object",
       "defaultValue": {
@@ -127,18 +107,6 @@
           "tier": "Basic",
           "size": "B1",
           "family": "B",
-          "capacity": 1
-        }
-      }
-    },
-    "azureFunctionAppServicePlanSettings": {
-      "type": "object",
-      "defaultValue": {
-        "sku": {
-          "name": "S1",
-          "tier": "Standard",
-          "size": "S1",
-          "family": "S",
           "capacity": 1
         }
       }
@@ -174,9 +142,6 @@
     "webappName": "[concat(variables('prefix'),'-webapp',variables('suffix'))]",
     "apiName": "[concat(variables('prefix'),'-api',variables('suffix'))]",
 
-    "azureFunctionAppServicePlanName": "[concat(variables('prefix'),'-appplan-af',variables('suffix'))]",
-    "azureFunctionName": "[concat(variables('prefix'),'-af',variables('suffix'))]",
-
     "keyVaultName": "[concat(variables('prefix'),'-kv', variables('suffix'))]",
     "keyVaultIoTHubConnectionStringKey": "[concat(variables('iotHubName'),'-connection-string')]",
     "keyVaultIoTHubKeyKey": "[concat(variables('iotHubName'),'-key')]",
@@ -191,52 +156,20 @@
     "keyVaultEventHubPolicyRootConnectionStringKey": "[concat(variables('eventHubNamespaceName'),'-root-connection-string')]",
     "keyVaultEventHubTelemetryPolicySendConnectionStringKey": "[concat(variables('eventHubNamespaceName'),'-',variables('eventHubTelemetryName'),'-policy-send-connection-string')]",
     "keyVaultEventHubTelemetryPolicyListenConnectionStringKey": "[concat(variables('eventHubNamespaceName'),'-',variables('eventHubTelemetryName'),'-policy-listen-connection-string')]",
-    "keyVaultEventHubValidatedTelemetryPolicySendConnectionStringKey": "[concat(variables('eventHubNamespaceName'),'-',variables('eventHubValidatedTelemetryName'),'-policy-send-connection-string')]",
-    "keyVaultEventHubValidatedTelemetryPolicyListenConnectionStringKey": "[concat(variables('eventHubNamespaceName'),'-',variables('eventHubValidatedTelemetryName'),'-policy-listen-connection-string')]",
-    "keyVaultEventHubTwinUpdatesPolicyListenConnectionStringKey": "[concat(variables('eventHubNamespaceName'),'-',variables('eventHubTwinUpdatesName'),'-policy-listen-connection-string')]",
-    "keyVaultEventHubDeviceLifecyclePolicyListenConnectionStringKey": "[concat(variables('eventHubNamespaceName'),'-',variables('eventHubDeviceLifecycleName'),'-policy-listen-connection-string')]",
     "keyVaultStorageKeyKey": "[concat(variables('storageAccountName'),'-key')]",
     "keyVaultStorageConnectionStringKey": "[concat(variables('storageAccountName'),'-connection-string')]",
-    "keyVaultAFStorageKeyKey": "[concat(variables('storageAccountAzureFunctionName'),'-key')]",
-    "keyVaultAFStorageConnectionStringKey": "[concat(variables('storageAccountAzureFunctionName'),'-connection-string')]",
     "keyVaultApplicationInsightInstrumentationKey": "[concat(variables('applicationInsightsName'),'-instrumentation-key')]",
     "keyVaultApplicationInsightConnectionStringKey": "[concat(variables('applicationInsightsName'),'-connection-string')]",
 
     "applicationInsightsName": "[concat(variables('prefix'),'-ah',variables('suffix'))]",
 
     "iotHubName": "[concat(variables('prefix'),'-iothub',variables('suffix'))]",
-    "DPSName": "[concat(variables('prefix'),'-dps',variables('suffix'))]",
-
     "eventHubNamespaceName": "[concat(variables('prefix'),'-eventhub-ns',variables('suffix'))]",
-    "eventHubDeviceLifecycleName": "devicelifecycle",
     "eventHubTelemetryName": "telemetry",
-    "eventHubValidatedTelemetryName": "validatedtelemetry",
-    "eventHubTwinUpdatesName": "twinupdates",
-
     "serviceBusNamespaceName": "[concat(variables('prefix'),'-servicebus-ns', variables('suffix'))]",
 
     "storageAccountName": "[concat(variables('prefixShort'),'storagehub',variables('suffixShort'))]",
-    "storageAccountContainerFileUploadsSettings": {
-      "name": "fileuploads",
-      "publicAccess": "None"
-    },
-    "storageAccountContainerFirmwaresSettings": {
-      "name": "firmwares",
-      "publicAccess": "None"
-    },
-    "storageAccountContainerSchemasSettings": {
-      "name": "schemas",
-      "publicAccess": "None"
-    },
-    "storageAccountContainerTwinUpdatesSettings": {
-      "name": "twinupdates",
-      "publicAccess": "None"
-    },
-
-    "storageAccountAzureFunctionName": "[concat(variables('prefixShort'),'af',variables('suffixShort'))]",
-    "apiAppServicePlanName": "[concat(variables('prefix'),'appserviceplan-api',variables('suffix'))]",
-
-    "fileUploadHandlerWebJobName": "[concat(variables('prefix'),'webjob-fileuploadhandler',variables('suffix'))]"
+    "apiAppServicePlanName": "[concat(variables('prefix'),'appserviceplan-api',variables('suffix'))]"
   },
   "resources": [
     {
@@ -304,12 +237,6 @@
                 "name": "TelemetryEndPoint",
                 "subscriptionId": "[variables('subscriptionId')]",
                 "resourceGroup": "[variables('rgName')]"
-              },
-              {
-                "connectionString": "[listKeys(resourceId('Microsoft.EventHub/namespaces/eventhubs/authorizationRules',variables('eventHubNamespaceName'), variables('eventHubTwinUpdatesName'), parameters('eventHubNamespaceSettings').authorizationRulesNames.send),'2017-04-01').primaryConnectionString]",
-                "name": "TwinUpdatesEndPoint",
-                "subscriptionId": "[variables('subscriptionId')]",
-                "resourceGroup": "[variables('rgName')]"
               }
             ],
             "storageContainers": []
@@ -332,16 +259,7 @@
                 "AlertsEndPoint"
               ],
               "isEnabled": true
-            },
-            {
-              "name": "TwinUpdatesRoute",
-              "source": "TwinChangeEvents",
-              "condition": "1=1",
-              "endpointNames": [
-                "TwinUpdatesEndPoint"
-              ],
-              "isEnabled": true
-            },
+            },            
             {
               "name": "ErrorRoute",
               "source": "DeviceMessages",
@@ -385,34 +303,6 @@
       ]
     },
     {
-      "type": "Microsoft.Devices/provisioningServices",
-      "apiVersion": "2018-01-22",
-      "name": "[variables('DPSName')]",
-      "location": "[parameters('location')]",
-      "sku": "[parameters('DPSSettings').sku]",
-      "tags": {
-        "displayName": "DPS",
-        "project": "[parameters('projectProperties').name]",
-        "feature": "[parameters('projectProperties').feature]",
-        "version": "[parameters('projectProperties').version]",
-        "environment": "[parameters('environment')]"
-      },
-      "properties": {
-        "state": "Active",
-        "provisioningState": "Succeeded",
-        "iotHubs": [
-          {
-            "connectionString": "[concat('HostName=', reference(resourceId('Microsoft.Devices/IoTHubs', variables('iotHubName')), providers('Microsoft.Devices', 'IoTHubs').apiVersions[0]).hostName, ';SharedAccessKeyName=iothubowner;SharedAccessKey=', listKeys(resourceId('Microsoft.Devices/IotHubs', variables('iotHubName')), providers('Microsoft.Devices', 'IoTHubs').apiVersions[0]).value[0].primaryKey)]",
-            "location": "[reference(resourceId('Microsoft.Devices/IoTHubs', variables('iotHubName')), providers('Microsoft.Devices', 'IoTHubs').apiVersions[0]).location]"
-          }
-        ],
-        "allocationPolicy": "Hashed"
-      },
-      "dependsOn": [
-        "[variables('iotHubName')]"
-      ]
-    },
-    {
       "type": "Microsoft.EventHub/namespaces",
       "sku": "[parameters('eventHubNamespaceSettings').sku]",
       "name": "[variables('eventHubNamespaceName')]",
@@ -452,98 +342,6 @@
       ]
     },
     {
-      "type": "Microsoft.EventHub/namespaces/eventhubs",
-      "name": "[concat(variables('eventHubNamespaceName'), '/', variables('eventHubValidatedTelemetryName'))]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "messageRetentionInDays": 1,
-        "partitionCount": 2,
-        "status": "Active"
-      },
-      "tags": {
-        "displayName": "Event Hub-Validated Telemetry"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.EventHub/namespaces', variables('eventHubNamespaceName'))]"
-      ]
-    },
-    {
-      "type": "Microsoft.EventHub/namespaces/eventhubs",
-      "name": "[concat(variables('eventHubNamespaceName'), '/', variables('eventHubTwinUpdatesName'))]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "messageRetentionInDays": 1,
-        "partitionCount": 2,
-        "status": "Active"
-      },
-      "tags": {
-        "displayName": "Event Hub-Twin Updates"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.EventHub/namespaces', variables('eventHubNamespaceName'))]"
-      ]
-    },
-    {
-      "type": "Microsoft.EventHub/namespaces/eventhubs",
-      "name": "[concat(variables('eventHubNamespaceName'), '/', variables('eventHubDeviceLifecycleName'))]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "messageRetentionInDays": 1,
-        "partitionCount": 2,
-        "status": "Active"
-      },
-      "tags": {
-        "displayName": "Event Hub-Device Lifecycle"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.EventHub/namespaces', variables('eventHubNamespaceName'))]"
-      ]
-    },
-    {
-      "type": "Microsoft.EventHub/namespaces/eventhubs/authorizationRules",
-      "name": "[concat(variables('eventHubNamespaceName'), '/', variables('eventHubDeviceLifecycleName'), '/', parameters('eventHubNamespaceSettings').authorizationRulesNames.listen)]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "rights": [
-          "Listen"
-        ]
-      },
-      "tags": {
-        "displayName": "Event Hub-Device Lifecycle-Authorization Rules-Listen"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.EventHub/namespaces', variables('eventHubNamespaceName'))]",
-        "[resourceId('Microsoft.EventHub/namespaces/eventhubs', variables('eventHubNamespaceName'), variables('eventHubDeviceLifecycleName'))]"
-      ]
-    },
-    {
-      "type": "Microsoft.EventHub/namespaces/eventhubs/authorizationRules",
-      "name": "[concat(variables('eventHubNamespaceName'), '/', variables('eventHubDeviceLifecycleName'), '/', parameters('eventHubNamespaceSettings').authorizationRulesNames.send)]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "rights": [
-          "Send"
-        ]
-      },
-      "tags": {
-        "displayName": "Event Hub-Device Lifecycle-Authorization Rules-Send"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.EventHub/namespaces', variables('eventHubNamespaceName'))]",
-        "[resourceId('Microsoft.EventHub/namespaces/eventhubs', variables('eventHubNamespaceName'), variables('eventHubDeviceLifecycleName'))]"
-      ]
-    },
-    {
       "type": "Microsoft.EventHub/namespaces/eventhubs/authorizationRules",
       "name": "[concat(variables('eventHubNamespaceName'), '/', variables('eventHubTelemetryName'), '/', parameters('eventHubNamespaceSettings').authorizationRulesNames.listen)]",
       "apiVersion": "2017-04-01",
@@ -579,82 +377,6 @@
       "dependsOn": [
         "[resourceId('Microsoft.EventHub/namespaces', variables('eventHubNamespaceName'))]",
         "[resourceId('Microsoft.EventHub/namespaces/eventhubs', variables('eventHubNamespaceName'), variables('eventHubTelemetryName'))]"
-      ]
-    },
-    {
-      "type": "Microsoft.EventHub/namespaces/eventhubs/authorizationRules",
-      "name": "[concat(variables('eventHubNamespaceName'), '/', variables('eventHubValidatedTelemetryName'), '/', parameters('eventHubNamespaceSettings').authorizationRulesNames.listen)]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "rights": [
-          "Listen"
-        ]
-      },
-      "tags": {
-        "displayName": "Event Hub-Validated Telemetry-Authorization Rules-Listen"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.EventHub/namespaces', variables('eventHubNamespaceName'))]",
-        "[resourceId('Microsoft.EventHub/namespaces/eventhubs', variables('eventHubNamespaceName'), variables('eventHubValidatedTelemetryName'))]"
-      ]
-    },
-    {
-      "type": "Microsoft.EventHub/namespaces/eventhubs/authorizationRules",
-      "name": "[concat(variables('eventHubNamespaceName'), '/', variables('eventHubValidatedTelemetryName'), '/', parameters('eventHubNamespaceSettings').authorizationRulesNames.send)]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "rights": [
-          "Send"
-        ]
-      },
-      "tags": {
-        "displayName": "Event Hub-Validated Telemetry-Authorization Rules-Send"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.EventHub/namespaces', variables('eventHubNamespaceName'))]",
-        "[resourceId('Microsoft.EventHub/namespaces/eventhubs', variables('eventHubNamespaceName'), variables('eventHubValidatedTelemetryName'))]"
-      ]
-    },
-    {
-      "type": "Microsoft.EventHub/namespaces/eventhubs/authorizationRules",
-      "name": "[concat(variables('eventHubNamespaceName'), '/', variables('eventHubTwinUpdatesName'), '/', parameters('eventHubNamespaceSettings').authorizationRulesNames.listen)]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "rights": [
-          "Listen"
-        ]
-      },
-      "tags": {
-        "displayName": "Event Hub-Twin Updates-Authorization Rules-Listen"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.EventHub/namespaces', variables('eventHubNamespaceName'))]",
-        "[resourceId('Microsoft.EventHub/namespaces/eventhubs', variables('eventHubNamespaceName'), variables('eventHubTwinUpdatesName'))]"
-      ]
-    },
-    {
-      "type": "Microsoft.EventHub/namespaces/eventhubs/authorizationRules",
-      "name": "[concat(variables('eventHubNamespaceName'), '/', variables('eventHubTwinUpdatesName'), '/', parameters('eventHubNamespaceSettings').authorizationRulesNames.send)]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "rights": [
-          "Send"
-        ]
-      },
-      "tags": {
-        "displayName": "Event Hub-Twin Updates-Authorization Rules-Send"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.EventHub/namespaces', variables('eventHubNamespaceName'))]",
-        "[resourceId('Microsoft.EventHub/namespaces/eventhubs', variables('eventHubNamespaceName'), variables('eventHubTwinUpdatesName'))]"
       ]
     },
     {
@@ -726,36 +448,6 @@
       "dependsOn": [
         "[resourceId('Microsoft.EventHub/namespaces', variables('eventHubNamespaceName'))]",
         "[resourceId('Microsoft.EventHub/namespaces/eventhubs', variables('eventHubNamespaceName'), variables('eventHubTelemetryName'))]"
-      ]
-    },
-    {
-      "type": "Microsoft.EventHub/namespaces/eventhubs/consumergroups",
-      "name": "[concat(variables('eventHubNamespaceName'), '/', variables('eventHubTwinUpdatesName'), '/', parameters('eventHubNamespaceSettings').consumerGroupsDefaultName)]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {},
-      "tags": {
-        "displayName": "Event Hub-Twin Updates-Consumer groups-Default"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.EventHub/namespaces', variables('eventHubNamespaceName'))]",
-        "[resourceId('Microsoft.EventHub/namespaces/eventhubs', variables('eventHubNamespaceName'), variables('eventHubTwinUpdatesName'))]"
-      ]
-    },
-    {
-      "type": "Microsoft.EventHub/namespaces/eventhubs/consumergroups",
-      "name": "[concat(variables('eventHubNamespaceName'), '/', variables('eventHubDeviceLifecycleName'), '/', parameters('eventHubNamespaceSettings').consumerGroupsDefaultName)]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {},
-      "tags": {
-        "displayName": "Event Hub-Device Lifecycle-Consumer groups-Default"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.EventHub/namespaces', variables('eventHubNamespaceName'))]",
-        "[resourceId('Microsoft.EventHub/namespaces/eventhubs', variables('eventHubNamespaceName'), variables('eventHubDeviceLifecycleName'))]"
       ]
     },
     {
@@ -889,69 +581,6 @@
       "dependsOn": [
         "[resourceId('Microsoft.ServiceBus/namespaces', variables('serviceBusNamespaceName'))]",
         "[resourceId('Microsoft.ServiceBus/namespaces/queues', variables('serviceBusNamespaceName'), parameters('serviceBusNamespaceSettings').queueNames.deviceError)]"
-      ]
-    },
-    {
-      "type": "Microsoft.ServiceBus/namespaces/topics/authorizationRules",
-      "name": "[concat(variables('serviceBusNamespaceName'), '/', parameters('serviceBusNamespaceSettings').topicNames.data, '/', parameters('serviceBusNamespaceSettings').authorizationRulesNames.listen)]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "rights": [
-          "Listen"
-        ]
-      },
-      "tags": {
-        "displayName": "ServiceBus-Topic-Authorization rules-Data-Listen"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.ServiceBus/namespaces', variables('serviceBusNamespaceName'))]",
-        "[resourceId('Microsoft.ServiceBus/namespaces/topics', variables('serviceBusNamespaceName'), parameters('serviceBusNamespaceSettings').topicNames.data)]"
-      ]
-    },
-    {
-      "type": "Microsoft.ServiceBus/namespaces/topics/authorizationRules",
-      "name": "[concat(variables('serviceBusNamespaceName'), '/', parameters('serviceBusNamespaceSettings').topicNames.data, '/', parameters('serviceBusNamespaceSettings').authorizationRulesNames.send)]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "rights": [
-          "Send"
-        ]
-      },
-      "tags": {
-        "displayName": "ServiceBus-Topic-Authorization rules-Data-Send"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.ServiceBus/namespaces', variables('serviceBusNamespaceName'))]",
-        "[resourceId('Microsoft.ServiceBus/namespaces/topics', variables('serviceBusNamespaceName'), parameters('serviceBusNamespaceSettings').topicNames.data)]"
-      ]
-    },
-    {
-      "type": "Microsoft.ServiceBus/namespaces/topics/subscriptions",
-      "name": "[concat(variables('serviceBusNamespaceName'), '/', parameters('serviceBusNamespaceSettings').topicNames.data, '/', parameters('serviceBusNamespaceSettings').topicSubscriptionNames.default)]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "lockDuration": "PT30S",
-        "requiresSession": false,
-        "defaultMessageTimeToLive": "P7D",
-        "deadLetteringOnMessageExpiration": false,
-        "deadLetteringOnFilterEvaluationExceptions": false,
-        "maxDeliveryCount": 10,
-        "status": "Active",
-        "enableBatchedOperations": false,
-        "autoDeleteOnIdle": "P10675199DT2H48M5.4775807S"
-      },
-      "tags": {
-        "displayName": "ServiceBus-Topic-Subscription-Data"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.ServiceBus/namespaces', variables('serviceBusNamespaceName'))]",
-        "[resourceId('Microsoft.ServiceBus/namespaces/topics', variables('serviceBusNamespaceName'), parameters('serviceBusNamespaceSettings').topicNames.data)]"
       ]
     },
     {
@@ -1194,44 +823,6 @@
     {
       "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
       "apiVersion": "2019-06-01",
-      "name": "[concat(variables('storageAccountName'), '/default/', variables('storageAccountContainerFileUploadsSettings').name)]",
-      "tags": {
-        "displayName": "Azure storage-Container creation-FileUpload",
-        "project": "[parameters('projectProperties').name]",
-        "feature": "[parameters('projectProperties').feature]",
-        "version": "[parameters('projectProperties').version]",
-        "environment": "[parameters('environment')]"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Storage/storageAccounts/blobServices', variables('storageAccountName'), 'default')]",
-        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
-      ],
-      "properties": {
-        "publicAccess": "[variables('storageAccountContainerFileUploadsSettings').publicAccess]"
-      }
-    },
-    {
-      "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
-      "apiVersion": "2019-06-01",
-      "name": "[concat(variables('storageAccountName'), '/default/', variables('storageAccountContainerFirmwaresSettings').name)]",
-      "tags": {
-        "displayName": "Azure storage-Container creation-Firmware",
-        "project": "[parameters('projectProperties').name]",
-        "feature": "[parameters('projectProperties').feature]",
-        "version": "[parameters('projectProperties').version]",
-        "environment": "[parameters('environment')]"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Storage/storageAccounts/blobServices', variables('storageAccountName'), 'default')]",
-        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
-      ],
-      "properties": {
-        "publicAccess": "[variables('storageAccountContainerFirmwaresSettings').publicAccess]"
-      }
-    },
-    {
-      "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
-      "apiVersion": "2019-06-01",
       "name": "[concat(variables('storageAccountName'), '/default/', variables('storageAccountContainerSchemasSettings').name)]",
       "tags": {
         "displayName": "Azure storage-Container creation-Schemas",
@@ -1247,64 +838,6 @@
       "properties": {
         "publicAccess": "[variables('storageAccountContainerSchemasSettings').publicAccess]"
       }
-    },
-    {
-      "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
-      "apiVersion": "2019-06-01",
-      "name": "[concat(variables('storageAccountName'), '/default/', variables('storageAccountContainerTwinUpdatesSettings').name)]",
-      "tags": {
-        "displayName": "Azure storage-Container creation-Twin updates",
-        "project": "[parameters('projectProperties').name]",
-        "feature": "[parameters('projectProperties').feature]",
-        "version": "[parameters('projectProperties').version]",
-        "environment": "[parameters('environment')]"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Storage/storageAccounts/blobServices', variables('storageAccountName'), 'default')]",
-        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
-      ],
-      "properties": {
-        "publicAccess": "[variables('storageAccountContainerTwinUpdatesSettings').publicAccess]"
-      }
-    },
-    {
-      "type": "Microsoft.Storage/storageAccounts",
-      "sku": "[parameters('storageAccountAzureFunctionSettings').sku]",
-      "kind": "Storage",
-      "name": "[variables('storageAccountAzureFunctionName')]",
-      "apiVersion": "2018-07-01",
-      "location": "[parameters('location')]",
-      "tags": {
-        "displayName": "Azure storage-Azure Functions",
-        "project": "[parameters('projectProperties').name]",
-        "feature": "[parameters('projectProperties').feature]",
-        "version": "[parameters('projectProperties').version]",
-        "environment": "[parameters('environment')]"
-      },
-      "scale": null,
-      "properties": {
-        "networkAcls": {
-          "bypass": "AzureServices",
-          "virtualNetworkRules": [],
-          "ipRules": [],
-          "defaultAction": "Allow"
-        },
-        "supportsHttpsTrafficOnly": false,
-        "encryption": {
-          "services": {
-            "file": {
-              "enabled": true
-            },
-            "blob": {
-              "enabled": true
-            }
-          },
-          "keySource": "Microsoft.Storage"
-        }
-      },
-      "dependsOn": [
-
-      ]
     },
     {
       "type": "Microsoft.Web/sites",
@@ -1403,58 +936,6 @@
       ]
     },
     {
-      "type": "Microsoft.Web/sites",
-      "kind": "functionapp",
-      "name": "[variables('azureFunctionName')]",
-      "identity": {
-        "type": "SystemAssigned"
-      },
-      "apiVersion": "2016-08-01",
-      "location": "[parameters('location')]",
-      "tags": {
-        "displayName": "Azure Function",
-        "project": "[parameters('projectProperties').name]",
-        "feature": "[parameters('projectProperties').feature]",
-        "version": "[parameters('projectProperties').version]",
-        "environment": "[parameters('environment')]",
-        "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', variables('azureFunctionAppServicePlanName'))]": "Resource"
-      },
-      "scale": null,
-      "properties": {
-        "enabled": true,
-        "serverFarmId": "[variables('azureFunctionAppServicePlanName')]",
-        "alwaysOn": true,
-        "reserved": false,
-        "httpsOnly": false
-
-      },
-      "resources": [
-        {
-          "name": "appsettings",
-          "type": "config",
-          "apiVersion": "2016-08-01",
-          "dependsOn": [
-            "[variables('azureFunctionName')]",
-            "[resourceId('Microsoft.Insights/components', variables('applicationInsightsName'))]",
-            "[variables('storageAccountAzureFunctionName')]"
-          ],
-          "properties": {
-            "APPLICATIONINSIGHTS_CONNECTION_STRING": "[concat('@Microsoft.KeyVault(SecretUri=', reference(resourceId('Microsoft.KeyVault/vaults/secrets', variables('keyVaultName'), variables('keyVaultApplicationInsightConnectionStringKey'))).secretUriWithVersion,')')]",
-
-            "AzureWebJobsDashboard": "[concat('@Microsoft.KeyVault(SecretUri=', reference(resourceId('Microsoft.KeyVault/vaults/secrets', variables('keyVaultName'), variables('keyVaultAFStorageConnectionStringKey'))).secretUriWithVersion,')')]",
-            "AzureWebJobsStorage": "[concat('@Microsoft.KeyVault(SecretUri=', reference(resourceId('Microsoft.KeyVault/vaults/secrets', variables('keyVaultName'), variables('keyVaultAFStorageConnectionStringKey'))).secretUriWithVersion,')')]",
-
-            "AzureSettings:EventHub:Temeletry:ConnectionString": "[concat('@Microsoft.KeyVault(SecretUri=', reference(resourceId('Microsoft.KeyVault/vaults/secrets', variables('keyVaultName'), variables('keyVaultEventHubTelemetryPolicyListenConnectionStringKey'))).secretUriWithVersion,')')]",
-            "AzureSettings:EventHub:ValidatedTemeletry:ConnectionString": "[concat('@Microsoft.KeyVault(SecretUri=', reference(resourceId('Microsoft.KeyVault/vaults/secrets', variables('keyVaultName'), variables('keyVaultEventHubValidatedTelemetryPolicySendConnectionStringKey'))).secretUriWithVersion,')')]"
-          }
-        }
-      ],
-      "dependsOn": [
-        "[variables('azureFunctionAppServicePlanName')]",
-        "[resourceId('Microsoft.Insights/components', variables('applicationInsightsName'))]"
-      ]
-    },
-    {
       "type": "Microsoft.KeyVault/vaults/secrets",
       "name": "[concat(variables('keyVaultName'), '/', variables('keyVaultIoTHubConnectionStringKey'))]",
       "apiVersion": "2016-10-01",
@@ -1532,46 +1013,6 @@
       "dependsOn": [
         "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]",
         "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
-      ]
-    },
-    {
-      "type": "Microsoft.KeyVault/vaults/secrets",
-      "name": "[concat(variables('keyVaultName'), '/', variables('keyVaultAFStorageKeyKey'))]",
-      "apiVersion": "2016-10-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "attributes": {
-          "enabled": true
-        },
-        "value": "[listKeys(resourceId('Microsoft.Storage/storageAccounts',variables('storageAccountAzureFunctionName')),'2018-07-01').keys[0].value]"
-      },
-      "tags": {
-        "displayName": "Azure Key Vault-Secret-keyVaultAFStorageKeyKey"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]",
-        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountAzureFunctionName'))]"
-      ]
-    },
-    {
-      "type": "Microsoft.KeyVault/vaults/secrets",
-      "name": "[concat(variables('keyVaultName'), '/', variables('keyVaultAFStorageConnectionStringKey'))]",
-      "apiVersion": "2016-10-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "attributes": {
-          "enabled": true
-        },
-        "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountAzureFunctionName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts',variables('storageAccountAzureFunctionName')),'2018-07-01').keys[0].value)]"
-      },
-      "tags": {
-        "displayName": "Azure Key Vault-Secret-keyVaultAFStorageConnectionStringKey"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]",
-        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountAzureFunctionName'))]"
       ]
     },
     {
@@ -1754,87 +1195,6 @@
         "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]",
         "[resourceId('Microsoft.EventHub/namespaces/eventhubs', variables('eventHubNamespaceName'), variables('eventHubTelemetryName'))]"
       ]
-    },
-    {
-      "type": "Microsoft.KeyVault/vaults/secrets",
-      "name": "[concat(variables('keyVaultName'), '/', variables('keyVaultEventHubValidatedTelemetryPolicySendConnectionStringKey'))]",
-      "apiVersion": "2016-10-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "attributes": {
-          "enabled": true
-        },
-        "value": "[listKeys(resourceId('Microsoft.EventHub/namespaces/eventhubs/authorizationRules', variables('eventHubNamespaceName'), variables('eventHubValidatedTelemetryName'), parameters('eventHubNamespaceSettings').authorizationRulesNames.send), '2015-08-01').primaryConnectionString]"
-      },
-      "tags": {
-        "displayName": "Azure Key Vault-Secret-keyVaultEventHubValidatedTelemetryPolicySendConnectionStringKey"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]",
-        "[resourceId('Microsoft.EventHub/namespaces/eventhubs', variables('eventHubNamespaceName'), variables('eventHubValidatedTelemetryName'))]"
-      ]
-    },
-    {
-      "type": "Microsoft.KeyVault/vaults/secrets",
-      "name": "[concat(variables('keyVaultName'), '/', variables('keyVaultEventHubValidatedTelemetryPolicyListenConnectionStringKey'))]",
-      "apiVersion": "2016-10-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "attributes": {
-          "enabled": true
-        },
-        "value": "[listKeys(resourceId('Microsoft.EventHub/namespaces/eventhubs/authorizationRules', variables('eventHubNamespaceName'), variables('eventHubValidatedTelemetryName'), parameters('eventHubNamespaceSettings').authorizationRulesNames.listen), '2015-08-01').primaryConnectionString]"
-      },
-      "tags": {
-        "displayName": "Azure Key Vault-Secret-keyVaultEventHubValidatedTelemetryPolicyListenConnectionStringKey"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]",
-        "[resourceId('Microsoft.EventHub/namespaces/eventhubs', variables('eventHubNamespaceName'), variables('eventHubValidatedTelemetryName'))]"
-      ]
-    },
-
-    {
-      "type": "Microsoft.KeyVault/vaults/secrets",
-      "name": "[concat(variables('keyVaultName'), '/', variables('keyVaultEventHubTwinUpdatesPolicyListenConnectionStringKey'))]",
-      "apiVersion": "2016-10-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "attributes": {
-          "enabled": true
-        },
-        "value": "[listKeys(resourceId('Microsoft.EventHub/namespaces/eventhubs/authorizationRules', variables('eventHubNamespaceName'), variables('eventHubTwinUpdatesName'), parameters('eventHubNamespaceSettings').authorizationRulesNames.listen), '2015-08-01').primaryConnectionString]"
-      },
-      "tags": {
-        "displayName": "Azure Key Vault-Secret-keyVaultEventHubTwinUpdatesPolicyListenConnectionStringKey"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]",
-        "[resourceId('Microsoft.EventHub/namespaces/eventhubs', variables('eventHubNamespaceName'), variables('eventHubTwinUpdatesName'))]"
-      ]
-    },
-    {
-      "type": "Microsoft.KeyVault/vaults/secrets",
-      "name": "[concat(variables('keyVaultName'), '/', variables('keyVaultEventHubDeviceLifecyclePolicyListenConnectionStringKey'))]",
-      "apiVersion": "2016-10-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "attributes": {
-          "enabled": true
-        },
-        "value": "[listKeys(resourceId('Microsoft.EventHub/namespaces/eventhubs/authorizationRules', variables('eventHubNamespaceName'), variables('eventHubDeviceLifecycleName'), parameters('eventHubNamespaceSettings').authorizationRulesNames.listen), '2015-08-01').primaryConnectionString]"
-      },
-      "tags": {
-        "displayName": "Azure Key Vault-Secret-keyVaultEventHubDeviceLifecyclePolicyListenConnectionStringKey"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]",
-        "[resourceId('Microsoft.EventHub/namespaces/eventhubs', variables('eventHubNamespaceName'), variables('eventHubDeviceLifecycleName'))]"
-      ]
     }
   ],
   "outputs": {
@@ -1862,25 +1222,13 @@
       "type": "string",
       "value": "[variables('apiName')]"
     },
-    "azureFunctionName": {
-      "type": "string",
-      "value": "[variables('azureFunctionName')]"
-    },
     "storageAccountName": {
       "type": "string",
       "value": "[variables('storageAccountName')]"
     },
-    "storageAccountAzureFunctionName": {
-      "type": "string",
-      "value": "[variables('storageAccountAzureFunctionName')]"
-    },
     "iotHubName": {
       "type": "string",
       "value": "[variables('iotHubName')]"
-    },
-    "DPSName": {
-      "type": "string",
-      "value": "[variables('DPSName')]"
     },
     "eventHubNamespaceName": {
       "type": "string",
