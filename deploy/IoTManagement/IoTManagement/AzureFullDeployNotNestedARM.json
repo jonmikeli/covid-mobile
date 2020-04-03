@@ -139,20 +139,11 @@
     "deploymentName": "[concat(variables('rgName'),'-deployment')]",
 
     "appServicePlanName": "[concat(variables('prefix'),'-appplan',variables('suffix'))]",
-    "webappName": "[concat(variables('prefix'),'-webapp',variables('suffix'))]",
     "apiName": "[concat(variables('prefix'),'-api',variables('suffix'))]",
 
     "keyVaultName": "[concat(variables('prefix'),'-kv', variables('suffix'))]",
     "keyVaultIoTHubConnectionStringKey": "[concat(variables('iotHubName'),'-connection-string')]",
     "keyVaultIoTHubKeyKey": "[concat(variables('iotHubName'),'-key')]",
-    "keyVaultServiceBusRootKeyKey": "[concat(variables('serviceBusNamespaceName'),'-root-key')]",
-    "keyVaultServiceBusRootConnectionStringKey": "[concat(variables('serviceBusNamespaceName'),'-root-connection-string')]",
-    "keyVaultServiceBusPolicyListenConnectionStringKey": "[concat(variables('serviceBusNamespaceName'),'-policy-listen-connection-string')]",
-    "keyVaultServiceBusPolicySendConnectionStringKey": "[concat(variables('serviceBusNamespaceName'),'-policy-send-connection-string')]",
-    "keyVaultServiceBusTopicAlertPolicyListenConnectionStringKey": "[concat(variables('serviceBusNamespaceName'),'-topic-',parameters('serviceBusNamespaceSettings').topicNames.alert,'-policy-listen-connection-string')]",
-    "keyVaultServiceBusTopicAlertPolicySendConnectionStringKey": "[concat(variables('serviceBusNamespaceName'),'-topic-',parameters('serviceBusNamespaceSettings').topicNames.alert,'-policy-send-connection-string')]",
-    "keyVaultServiceBusQueueErrorPolicyListenConnectionStringKey": "[concat(variables('serviceBusNamespaceName'),'-queue-',parameters('serviceBusNamespaceSettings').queueNames.deviceError,'-policy-listen-connection-string')]",
-    "keyVaultServiceBusQueueErrorPolicySendConnectionStringKey": "[concat(variables('serviceBusNamespaceName'),'-queue-',parameters('serviceBusNamespaceSettings').queueNames.deviceError,'-policy-send-connection-string')]",
     "keyVaultEventHubPolicyRootConnectionStringKey": "[concat(variables('eventHubNamespaceName'),'-root-connection-string')]",
     "keyVaultEventHubTelemetryPolicySendConnectionStringKey": "[concat(variables('eventHubNamespaceName'),'-',variables('eventHubTelemetryName'),'-policy-send-connection-string')]",
     "keyVaultEventHubTelemetryPolicyListenConnectionStringKey": "[concat(variables('eventHubNamespaceName'),'-',variables('eventHubTelemetryName'),'-policy-listen-connection-string')]",
@@ -166,7 +157,6 @@
     "iotHubName": "[concat(variables('prefix'),'-iothub',variables('suffix'))]",
     "eventHubNamespaceName": "[concat(variables('prefix'),'-eventhub-ns',variables('suffix'))]",
     "eventHubTelemetryName": "telemetry",
-    "serviceBusNamespaceName": "[concat(variables('prefix'),'-servicebus-ns', variables('suffix'))]",
 
     "storageAccountName": "[concat(variables('prefixShort'),'storagehub',variables('suffixShort'))]",
     "apiAppServicePlanName": "[concat(variables('prefix'),'appserviceplan-api',variables('suffix'))]"
@@ -301,6 +291,7 @@
         "[resourceId('Microsoft.ServiceBus/namespaces/queues/authorizationRules',variables('serviceBusNamespaceName'), parameters('serviceBusNamespaceSettings').queueNames.deviceError, parameters('serviceBusNamespaceSettings').authorizationRulesNames.send)]",
         "[resourceId('Microsoft.Storage/storageAccounts',variables('storageAccountName'))]"
       ]
+
     },
     {
       "type": "Microsoft.EventHub/namespaces",
@@ -451,202 +442,6 @@
       ]
     },
     {
-      "type": "Microsoft.ServiceBus/namespaces",
-      "sku": "[parameters('serviceBusNamespaceSettings').sku]",
-      "name": "[variables('serviceBusNamespaceName')]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "tags": {
-        "displayName": "ServiceBus-Namespace"
-      },
-      "scale": null,
-      "properties": {
-        "provisioningState": "Succeeded",
-        "serviceBusEndpoint": "[concat('https://', variables('serviceBusNamespaceName'),'.servicebus.windows.net:443/')]",
-        "status": "Active"
-      },
-      "dependsOn": []
-    },
-    {
-      "type": "Microsoft.ServiceBus/namespaces/queues",
-      "name": "[concat(variables('serviceBusNamespaceName'), '/', parameters('serviceBusNamespaceSettings').queueNames.deviceError)]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "lockDuration": "PT30S",
-        "maxSizeInMegabytes": 5120,
-        "requiresDuplicateDetection": false,
-        "requiresSession": false,
-        "defaultMessageTimeToLive": "P2D",
-        "deadLetteringOnMessageExpiration": false,
-        "enableBatchedOperations": true,
-        "duplicateDetectionHistoryTimeWindow": "PT10M",
-        "maxDeliveryCount": 10,
-        "status": "Active",
-        "autoDeleteOnIdle": "P10675199DT2H48M5.4775807S",
-        "enablePartitioning": true,
-        "enableExpress": false
-      },
-      "tags": {
-        "displayName": "ServiceBus-Queue-DeviceError"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.ServiceBus/namespaces', variables('serviceBusNamespaceName'))]"
-      ]
-    },
-    {
-      "type": "Microsoft.ServiceBus/namespaces/topics",
-      "name": "[concat(variables('serviceBusNamespaceName'), '/', parameters('serviceBusNamespaceSettings').topicNames.data)]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "defaultMessageTimeToLive": "P1D",
-        "maxSizeInMegabytes": 5120,
-        "requiresDuplicateDetection": false,
-        "duplicateDetectionHistoryTimeWindow": "PT10M",
-        "enableBatchedOperations": true,
-        "status": "Active",
-        "supportOrdering": false,
-        "autoDeleteOnIdle": "P10675199DT2H48M5.4775807S",
-        "enablePartitioning": true,
-        "enableExpress": false
-      },
-      "tags": {
-        "displayName": "ServiceBus-Topic-Data"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.ServiceBus/namespaces', variables('serviceBusNamespaceName'))]"
-      ]
-    },
-    {
-      "type": "Microsoft.ServiceBus/namespaces/topics",
-      "name": "[concat(variables('serviceBusNamespaceName'), '/', parameters('serviceBusNamespaceSettings').topicNames.alert)]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "defaultMessageTimeToLive": "P1D",
-        "maxSizeInMegabytes": 5120,
-        "requiresDuplicateDetection": false,
-        "duplicateDetectionHistoryTimeWindow": "PT10M",
-        "enableBatchedOperations": true,
-        "status": "Active",
-        "supportOrdering": false,
-        "autoDeleteOnIdle": "P10675199DT2H48M5.4775807S",
-        "enablePartitioning": true,
-        "enableExpress": false
-      },
-      "tags": {
-        "displayName": "ServiceBus-Topic-Alert"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.ServiceBus/namespaces', variables('serviceBusNamespaceName'))]"
-      ]
-    },
-    {
-      "type": "Microsoft.ServiceBus/namespaces/queues/authorizationRules",
-      "name": "[concat(variables('serviceBusNamespaceName'), '/', parameters('serviceBusNamespaceSettings').queueNames.deviceError, '/', parameters('serviceBusNamespaceSettings').authorizationRulesNames.send)]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "rights": [
-          "Send"
-        ]
-      },
-      "tags": {
-        "displayName": "ServiceBus-Queue-Authorization rules-DeviceError-Send"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.ServiceBus/namespaces', variables('serviceBusNamespaceName'))]",
-        "[resourceId('Microsoft.ServiceBus/namespaces/queues', variables('serviceBusNamespaceName'), parameters('serviceBusNamespaceSettings').queueNames.deviceError)]"
-      ]
-    },
-    {
-      "type": "Microsoft.ServiceBus/namespaces/queues/authorizationRules",
-      "name": "[concat(variables('serviceBusNamespaceName'), '/', parameters('serviceBusNamespaceSettings').queueNames.deviceError, '/', parameters('serviceBusNamespaceSettings').authorizationRulesNames.listen)]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "rights": [
-          "Listen"
-        ]
-      },
-      "tags": {
-        "displayName": "ServiceBus-Queue-Authorization rules-DeviceError-Listen"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.ServiceBus/namespaces', variables('serviceBusNamespaceName'))]",
-        "[resourceId('Microsoft.ServiceBus/namespaces/queues', variables('serviceBusNamespaceName'), parameters('serviceBusNamespaceSettings').queueNames.deviceError)]"
-      ]
-    },
-    {
-      "type": "Microsoft.ServiceBus/namespaces/topics/authorizationRules",
-      "name": "[concat(variables('serviceBusNamespaceName'), '/', parameters('serviceBusNamespaceSettings').topicNames.alert, '/', parameters('serviceBusNamespaceSettings').authorizationRulesNames.listen)]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "rights": [
-          "Listen"
-        ]
-      },
-      "tags": {
-        "displayName": "ServiceBus-Topic-Authorization rules-Alert-Listen"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.ServiceBus/namespaces', variables('serviceBusNamespaceName'))]",
-        "[resourceId('Microsoft.ServiceBus/namespaces/topics', variables('serviceBusNamespaceName'), parameters('serviceBusNamespaceSettings').topicNames.alert)]"
-      ]
-    },
-    {
-      "type": "Microsoft.ServiceBus/namespaces/topics/authorizationRules",
-      "name": "[concat(variables('serviceBusNamespaceName'), '/', parameters('serviceBusNamespaceSettings').topicNames.alert, '/', parameters('serviceBusNamespaceSettings').authorizationRulesNames.send)]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "rights": [
-          "Send"
-        ]
-      },
-      "tags": {
-        "displayName": "ServiceBus-Topic-Authorization rules-Alert-Send"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.ServiceBus/namespaces', variables('serviceBusNamespaceName'))]",
-        "[resourceId('Microsoft.ServiceBus/namespaces/topics', variables('serviceBusNamespaceName'), parameters('serviceBusNamespaceSettings').topicNames.alert)]"
-      ]
-    },
-    {
-      "type": "Microsoft.ServiceBus/namespaces/topics/subscriptions",
-      "name": "[concat(variables('serviceBusNamespaceName'), '/', parameters('serviceBusNamespaceSettings').topicNames.alert, '/', parameters('serviceBusNamespaceSettings').topicSubscriptionNames.default)]",
-      "apiVersion": "2017-04-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "lockDuration": "PT30S",
-        "requiresSession": false,
-        "defaultMessageTimeToLive": "P7D",
-        "deadLetteringOnMessageExpiration": false,
-        "deadLetteringOnFilterEvaluationExceptions": false,
-        "maxDeliveryCount": 10,
-        "status": "Active",
-        "enableBatchedOperations": false,
-        "autoDeleteOnIdle": "P10675199DT2H48M5.4775807S"
-      },
-      "tags": {
-        "displayName": "ServiceBus-Topic-Subscription-Alert"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.ServiceBus/namespaces', variables('serviceBusNamespaceName'))]",
-        "[resourceId('Microsoft.ServiceBus/namespaces/topics', variables('serviceBusNamespaceName'), parameters('serviceBusNamespaceSettings').topicNames.alert)]"
-      ]
-    },
-    {
       "type": "Microsoft.Web/serverfarms",
       "sku": "[parameters('appServicePlanSettings').sku]",
       "kind": "app",
@@ -662,27 +457,6 @@
       },
       "properties": {
         "name": "[variables('appServicePlanName')]",
-        "reserved": false
-      },
-      "dependsOn": []
-    },
-    {
-      "type": "Microsoft.Web/serverfarms",
-      "sku": "[parameters('azureFunctionAppServicePlanSettings').sku]",
-      "kind": "app",
-      "name": "[variables('azureFunctionAppServicePlanName')]",
-      "apiVersion": "2016-09-01",
-      "location": "[parameters('location')]",
-      "tags": {
-        "displayName": "Hosting plan-Azure Functions",
-        "project": "[parameters('projectProperties').name]",
-        "feature": "[parameters('projectProperties').feature]",
-        "version": "[parameters('projectProperties').version]",
-        "environment": "[parameters('environment')]"
-      },
-      "scale": null,
-      "properties": {
-        "name": "[variables('azureFunctionAppServicePlanName')]",
         "reserved": false
       },
       "dependsOn": []
@@ -892,50 +666,6 @@
       ]
     },
     {
-      "type": "Microsoft.Web/sites",
-      "kind": "web",
-      "name": "[variables('webappName')]",
-      "apiVersion": "2016-08-01",
-      "location": "[parameters('location')]",
-      "tags": {
-        "displayName": "Web site",
-        "project": "[parameters('projectProperties').name]",
-        "feature": "[parameters('projectProperties').feature]",
-        "version": "[parameters('projectProperties').version]",
-        "environment": "[parameters('environment')]",
-        "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', variables('appServicePlanName'))]": "Resource"
-      },
-      "scale": null,
-      "properties": {
-        "name": "[variables('webappName')]",
-        "enabled": true,
-        "serverFarmId": "[variables('appServicePlanName')]",
-        "alwaysOn": false,
-        "reserved": false,
-        "httpsOnly": true
-      },
-      "resources": [
-        {
-          "name": "appsettings",
-          "type": "config",
-          "apiVersion": "2016-08-01",
-          "dependsOn": [
-            "[variables('webappName')]",
-            "[resourceId('Microsoft.Insights/components', variables('applicationInsightsName'))]"
-          ],
-          "properties": {
-            "APPINSIGHTS_INSTRUMENTATIONKEY": "[concat('@Microsoft.KeyVault(SecretUri=', reference(resourceId('Microsoft.KeyVault/vaults/secrets', variables('keyVaultName'), variables('keyVaultApplicationInsightInstrumentationKey'))).secretUriWithVersion,')')]",
-            "businessServiceURL": "[concat('https://',variables('apiName'),'.azurewebsites.net')]"
-          }
-        }
-      ],
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms/', variables('appServicePlanName'))]",
-        "[resourceId('Microsoft.Insights/components', variables('applicationInsightsName'))]",
-        "[variables('keyVaultName')]"
-      ]
-    },
-    {
       "type": "Microsoft.KeyVault/vaults/secrets",
       "name": "[concat(variables('keyVaultName'), '/', variables('keyVaultIoTHubConnectionStringKey'))]",
       "apiVersion": "2016-10-01",
@@ -1057,107 +787,6 @@
     },
     {
       "type": "Microsoft.KeyVault/vaults/secrets",
-      "name": "[concat(variables('keyVaultName'), '/', variables('keyVaultServiceBusRootConnectionStringKey'))]",
-      "apiVersion": "2016-10-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "attributes": {
-          "enabled": true
-        },
-        "value": "[listKeys(resourceId('Microsoft.ServiceBus/namespaces/authorizationRules', variables('serviceBusNamespaceName'), 'RootManageSharedAccessKey'), '2015-08-01').primaryConnectionString]"
-      },
-      "tags": {
-        "displayName": "Azure Key Vault-Secret-keyVaultServiceBusRootConnectionStringKey"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]",
-        "[resourceId('Microsoft.ServiceBus/namespaces', variables('serviceBusNamespaceName'))]"
-      ]
-    },
-    {
-      "type": "Microsoft.KeyVault/vaults/secrets",
-      "name": "[concat(variables('keyVaultName'), '/', variables('keyVaultServiceBusTopicAlertPolicyListenConnectionStringKey'))]",
-      "apiVersion": "2016-10-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "attributes": {
-          "enabled": true
-        },
-        "value": "[listKeys(resourceId('Microsoft.ServiceBus/namespaces/topics/authorizationRules', variables('serviceBusNamespaceName'), parameters('serviceBusNamespaceSettings').topicNames.alert,parameters('serviceBusNamespaceSettings').authorizationRulesNames.listen), '2015-08-01').primaryConnectionString]"
-      },
-      "tags": {
-        "displayName": "Azure Key Vault-Secret-keyVaultServiceBusTopicAlertPolicyListenConnectionStringKey"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]",
-        "[resourceId('Microsoft.ServiceBus/namespaces', variables('serviceBusNamespaceName'))]"
-      ]
-    },
-    {
-      "type": "Microsoft.KeyVault/vaults/secrets",
-      "name": "[concat(variables('keyVaultName'), '/', variables('keyVaultServiceBusTopicAlertPolicySendConnectionStringKey'))]",
-      "apiVersion": "2016-10-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "attributes": {
-          "enabled": true
-        },
-        "value": "[listKeys(resourceId('Microsoft.ServiceBus/namespaces/topics/authorizationRules', variables('serviceBusNamespaceName'), parameters('serviceBusNamespaceSettings').topicNames.alert,parameters('serviceBusNamespaceSettings').authorizationRulesNames.send), '2015-08-01').primaryConnectionString]"
-      },
-      "tags": {
-        "displayName": "Azure Key Vault-Secret-keyVaultServiceBusTopicAlertPolicySendConnectionStringKey"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]",
-        "[resourceId('Microsoft.ServiceBus/namespaces', variables('serviceBusNamespaceName'))]"
-      ]
-    },
-    {
-      "type": "Microsoft.KeyVault/vaults/secrets",
-      "name": "[concat(variables('keyVaultName'), '/', variables('keyVaultServiceBusQueueErrorPolicyListenConnectionStringKey'))]",
-      "apiVersion": "2016-10-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "attributes": {
-          "enabled": true
-        },
-        "value": "[listKeys(resourceId('Microsoft.ServiceBus/namespaces/queues/authorizationRules', variables('serviceBusNamespaceName'), parameters('serviceBusNamespaceSettings').queueNames.deviceError,parameters('serviceBusNamespaceSettings').authorizationRulesNames.listen), '2015-08-01').primaryConnectionString]"
-      },
-      "tags": {
-        "displayName": "Azure Key Vault-Secret-keyVaultServiceBusQueueErrorPolicyListenConnectionStringKey"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]",
-        "[resourceId('Microsoft.ServiceBus/namespaces/queues', variables('serviceBusNamespaceName'), parameters('serviceBusNamespaceSettings').queueNames.deviceError)]"
-      ]
-    },
-    {
-      "type": "Microsoft.KeyVault/vaults/secrets",
-      "name": "[concat(variables('keyVaultName'), '/', variables('keyVaultServiceBusQueueErrorPolicySendConnectionStringKey'))]",
-      "apiVersion": "2016-10-01",
-      "location": "[parameters('location')]",
-      "scale": null,
-      "properties": {
-        "attributes": {
-          "enabled": true
-        },
-        "value": "[listKeys(resourceId('Microsoft.ServiceBus/namespaces/queues/authorizationRules', variables('serviceBusNamespaceName'), parameters('serviceBusNamespaceSettings').queueNames.deviceError,parameters('serviceBusNamespaceSettings').authorizationRulesNames.send), '2015-08-01').primaryConnectionString]"
-      },
-      "tags": {
-        "displayName": "Azure Key Vault-Secret-keyVaultServiceBusQueueErrorPolicySendConnectionStringKey"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]",
-        "[resourceId('Microsoft.ServiceBus/namespaces/queues', variables('serviceBusNamespaceName'), parameters('serviceBusNamespaceSettings').queueNames.deviceError)]"
-      ]
-    },
-
-    {
-      "type": "Microsoft.KeyVault/vaults/secrets",
       "name": "[concat(variables('keyVaultName'), '/', variables('keyVaultEventHubTelemetryPolicySendConnectionStringKey'))]",
       "apiVersion": "2016-10-01",
       "location": "[parameters('location')]",
@@ -1214,10 +843,6 @@
       "type": "string",
       "value": "[variables('keyVaultName')]"
     },
-    "webappName": {
-      "type": "string",
-      "value": "[variables('webappName')]"
-    },
     "apiName": {
       "type": "string",
       "value": "[variables('apiName')]"
@@ -1233,10 +858,6 @@
     "eventHubNamespaceName": {
       "type": "string",
       "value": "[variables('eventHubNamespaceName')]"
-    },
-    "serviceBusNamespaceName": {
-      "type": "string",
-      "value": "[variables('serviceBusNamespaceName')]"
     },
     "applicationInsightsName": {
       "type": "string",
