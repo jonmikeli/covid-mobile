@@ -42,7 +42,7 @@ Functional description:
 
 ## Format
 
-JSON
+JSON (being done)
 {
     "deviceId":"",
     "recordDate":"20200403T22:10:05",
