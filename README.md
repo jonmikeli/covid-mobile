@@ -1,4 +1,4 @@
-# Covid data gatherer
+# Covid data collector
 
 COVID pandemic is world wide and the impact in all our lives is being huge.
 The sooner we stop it (or find medics), the better for all of us.
