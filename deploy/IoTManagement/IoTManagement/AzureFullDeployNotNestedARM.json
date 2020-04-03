@@ -287,8 +287,6 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.EventHub/namespaces/eventhubs/authorizationRules',variables('eventHubNamespaceName'), variables('eventHubTelemetryName'), parameters('eventHubNamespaceSettings').authorizationRulesNames.send)]",
-        "[resourceId('Microsoft.EventHub/namespaces/eventhubs/authorizationRules',variables('eventHubNamespaceName'), variables('eventHubTwinUpdatesName'), parameters('eventHubNamespaceSettings').authorizationRulesNames.send)]",
-        "[resourceId('Microsoft.ServiceBus/namespaces/queues/authorizationRules',variables('serviceBusNamespaceName'), parameters('serviceBusNamespaceSettings').queueNames.deviceError, parameters('serviceBusNamespaceSettings').authorizationRulesNames.send)]",
         "[resourceId('Microsoft.Storage/storageAccounts',variables('storageAccountName'))]"
       ]
 
