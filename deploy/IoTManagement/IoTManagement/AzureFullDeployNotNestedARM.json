@@ -377,7 +377,7 @@
       "type": "Microsoft.Devices/provisioningServices",
       "apiVersion": "2018-01-22",
       "name": "[variables('DPSName')]",
-      "location": "westeurope",
+      "location": "[parameters('location')]",
       "sku": {
         "name": "S1",
         "tier": "Standard",
