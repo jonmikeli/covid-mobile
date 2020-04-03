@@ -6,10 +6,11 @@ It seems that not all the patients are registered in hospitals and we are maybe 
 ## Data
 
 Functional description:
- - Phone IMEI (technical) (string)
+ - Device ID (technical, could be the IMEI) (string)
  - Date of record creation (date)
  - Date of record transmission (date)
  - Age (integer)
+ - Gender (string, enumeration ideally)
  - Symptoms:
      - Temperature (boolean)
      - Temperature value (decimal)
@@ -33,7 +34,11 @@ Functional description:
 
 JSON
 {
-    "imei":"",
+    "deviceId":"",
+    "recordDate":"20200403T22:10:05",
+    "transmissionDate":"20200403T22:10:05",
+    "age":35,
+    "gender":"male",
     "temperature":true,
     "temperatureValue":10.2,
     "temperatureDescription":"only the morning"
