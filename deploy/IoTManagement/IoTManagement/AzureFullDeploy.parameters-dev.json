@@ -1,0 +1,128 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "projectProperties": {
+      "value": {
+        "name": "IOT COVID",
+        "code": "iotc",
+        "feature": "m",
+        "version": "v0.1",
+        "customer": "HUGJMI",
+        "customerCode": "hugjmi"
+      }
+    },
+    "environment": {
+      "value": "dev"
+    },
+    "module": {
+      "value": "IoTManagement"
+    },
+    "moduleCode": {
+      "value": "iot"
+    },
+    "location": {
+      "value": "westeurope"
+    },
+    "appServicePlanSku": {
+      "value": "F1"
+    },
+    "storageAccountSettings": {
+      "value": {
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        }
+      }
+    },
+    "storageAccountAzureFunctionSettings": {
+      "value": {
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        }
+      }
+    },
+    "appServicePlanSettings": {
+      "value": {
+        "sku": {
+          "name": "B1",
+          "tier": "Basic",
+          "size": "B1",
+          "family": "B",
+          "capacity": 1
+        }
+      }
+    },
+    "azureFunctionAppServicePlanSettings": {
+      "value": {
+        "sku": {
+          "name": "S1",
+          "tier": "Standard",
+          "size": "S1",
+          "family": "S",
+          "capacity": 1
+        }
+      }
+    },
+    "keyVaultSettings": {
+      "value": {
+        "sku": {
+          "family": "A",
+          "name": "Standard"
+        }
+      }
+    },
+    "iotHubSettings": {
+      "value": {
+        "sku": {
+          "name": "S1",
+          "tier": "Standard",
+          "capacity": 2
+        },
+        "authorizationPolicyOwnerName": "iothubowner"
+      }
+    },
+    "eventHubNamespaceSettings": {
+      "value": {
+        "sku": {
+          "name": "Standard",
+          "tier": "Standard",
+          "capacity": 2
+        },
+        "authorizationRulesNames": {
+          "rootManage": "RootManagePolicy",
+          "send": "SendPolicy",
+          "listen": "ListenPolicy"
+        },
+        "consumerGroupsDefaultName": "$Default"
+      }
+    },
+    "serviceBusNamespaceSettings": {
+      "value": {
+        "sku": {
+          "name": "Standard",
+          "tier": "Standard"
+        },
+        "authorizationRulesNames": {
+          "rootManage": "RootManagePolicy",
+          "send": "SendPolicy",
+          "listen": "ListenPolicy"
+        },
+        "queueNames": {
+          "deviceError": "deviceerror"
+        },
+        "topicNames": {
+          "data": "data",
+          "alert": "alert"
+        },
+        "topicSubscriptionNames": {
+          "default": "ApplicationSubscription"
+        }
+      }
+    },
+    "rgName": {
+      "value": ""
+    }
+  }
+}
