@@ -135,6 +135,10 @@
     "eventHubTelemetryName": "telemetry",
 
     "storageAccountName": "[concat(variables('prefixShort'),'storagehub',variables('suffixShort'))]",
+    "storageAccountContainerFileUploadsSettings": {
+      "name": "fileuploads",
+      "publicAccess": "None"
+    },
     "apiAppServicePlanName": "[concat(variables('prefix'),'appserviceplan-api',variables('suffix'))]"
   },
   "resources": [
