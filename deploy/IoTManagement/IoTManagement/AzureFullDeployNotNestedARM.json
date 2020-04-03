@@ -66,30 +66,6 @@
         "consumerGroupsDefaultName": "$Default"
       }
     },
-    "serviceBusNamespaceSettings": {
-      "type": "object",
-      "defaultValue": {
-        "sku": {
-          "name": "Standard",
-          "tier": "Standard"
-        },
-        "authorizationRulesNames": {
-          "rootManage": "RootManagePolicy",
-          "send": "SendPolicy",
-          "listen": "ListenPolicy"
-        },
-        "queueNames": {
-          "deviceError": "deviceerror"
-        },
-        "topicNames": {
-          "data": "data",
-          "alert": "alert"
-        },
-        "topicSubscriptionNames": {
-          "default": "ApplicationSubscription"
-        }
-      }
-    },
     "storageAccountSettings": {
       "type": "object",
       "defaultValue": {
@@ -205,22 +181,6 @@
         "features": "None",
         "routing": {
           "endpoints": {
-            "serviceBusQueues": [
-              {
-                "connectionString": "[listKeys(resourceId('Microsoft.ServiceBus/namespaces/queues/authorizationRules',variables('serviceBusNamespaceName'), parameters('serviceBusNamespaceSettings').queueNames.deviceError, parameters('serviceBusNamespaceSettings').authorizationRulesNames.send),'2017-04-01').primaryConnectionString]",
-                "name": "DeviceErrorEndPoint",
-                "subscriptionId": "[variables('subscriptionId')]",
-                "resourceGroup": "[variables('rgName')]"
-              }
-            ],
-            "serviceBusTopics": [
-              {
-                "connectionString": "[listKeys(resourceId('Microsoft.ServiceBus/namespaces/topics/authorizationRules',variables('serviceBusNamespaceName'), parameters('serviceBusNamespaceSettings').topicNames.alert, parameters('serviceBusNamespaceSettings').authorizationRulesNames.send),'2017-04-01').primaryConnectionString]",
-                "name": "AlertsEndPoint",
-                "subscriptionId": "[variables('subscriptionId')]",
-                "resourceGroup": "[variables('rgName')]"
-              }
-            ],
             "eventHubs": [
               {
                 "connectionString": "[listKeys(resourceId('Microsoft.EventHub/namespaces/eventhubs/authorizationRules',variables('eventHubNamespaceName'), variables('eventHubTelemetryName'), parameters('eventHubNamespaceSettings').authorizationRulesNames.send),'2017-04-01').primaryConnectionString]",
@@ -238,24 +198,6 @@
               "condition": "$body.messageType = 'data'",
               "endpointNames": [
                 "TelemetryEndPoint"
-              ],
-              "isEnabled": true
-            },
-            {
-              "name": "AlertsRoute",
-              "source": "DeviceMessages",
-              "condition": "$body.messageType = 'alert'",
-              "endpointNames": [
-                "AlertsEndPoint"
-              ],
-              "isEnabled": true
-            },            
-            {
-              "name": "ErrorRoute",
-              "source": "DeviceMessages",
-              "condition": "$body.messageType = 'error'",
-              "endpointNames": [
-                "DeviceErrorEndPoint"
               ],
               "isEnabled": true
             }
