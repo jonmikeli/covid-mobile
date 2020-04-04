@@ -40,18 +40,12 @@ Functional description:
      - Cleaning frecuency
 
 
-## Format
+## JSON Schema
 
-JSON (being done)
-{
-    "deviceId":"",
-    "recordDate":"20200403T22:10:05",
-    "transmissionDate":"20200403T22:10:05",
-    "age":35,
-    "gender":"male",
-    "temperature":true,
-    "temperatureValue":10.2,
-    "temperatureDescription":"only the morning",
-    "muscularPain":false,
-    
-}
+[This](../schemas/dataSchema.json) is the corresponding [JSON schema](../schemas/dataSchema.json).
+
+## JSON Example
+
+[This](../json/data.json) is a sample of data in [JSON](../json/data.json).
+
+
