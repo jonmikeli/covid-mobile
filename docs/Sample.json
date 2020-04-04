@@ -1,0 +1,33 @@
+{
+    "deviceId":"",
+    "recordDate":"20200403T22:10:05",
+    "transmissionDate":"20200403T22:10:05",
+    "age":35,
+    "gender":"male",
+    "symptoms":
+    {
+        "temperature":true,
+        "temperatureValue":10.2,
+        "temperatureDescription":"only the morning",
+        "muscularPain":false,
+        "muscularPainLevel":1,
+        "muscularPainDescription":"",
+        "cough":true,
+        "coughLevel":2,
+        "coughDescription":"",
+        "smell":false,
+        "smellDescription":"",
+        "taste":true,
+        "tasteDescription":"",
+        "headaches":true,
+        "headachesDescription":"",
+        "improving":false,
+        "other":""
+    },
+    "environment":{
+        "housing":"",
+        "transportation":"",
+        "location":"",
+        "socialDistance":""
+    }    
+}
