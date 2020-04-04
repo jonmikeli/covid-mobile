@@ -192,7 +192,7 @@
             "eventHubs": [
               {
                 "connectionString": "[listKeys(resourceId('Microsoft.EventHub/namespaces/eventhubs/authorizationRules',variables('eventHubNamespaceName'), variables('eventHubTelemetryName'), parameters('eventHubNamespaceSettings').authorizationRulesNames.send),'2017-04-01').primaryConnectionString]",
-                "name": "TelemetryEndPoint",
+                "name": "TelemetryEventHubEndPoint",
                 "subscriptionId": "[variables('subscriptionId')]",
                 "resourceGroup": "[variables('rgName')]"
               }
@@ -217,7 +217,7 @@
               "source": "DeviceMessages",
               "condition": "$body.messageType = 'data'",
               "endpointNames": [
-                "TelemetryEndPoint"
+                "TelemetryEventHubEndPoint"
               ],
               "isEnabled": true
             },
