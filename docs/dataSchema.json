@@ -6,10 +6,12 @@
       "type": "string"
     },
     "recordDate": {
-      "type": "string"
+      "type": "string",
+      "format":"date-time"
     },
     "transmissionDate": {
-      "type": "string"
+      "type": "string",
+      "format":"date-time"
     },
     "age": {
       "type": "integer",
