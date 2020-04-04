@@ -83,7 +83,6 @@
       },
       "required": [
         "temperature",        
-        "temperatureUnity",        
         "muscularPain",
         "cough",
         "smellLoss",
