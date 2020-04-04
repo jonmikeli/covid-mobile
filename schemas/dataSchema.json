@@ -28,6 +28,10 @@
         "temperature": {
           "type": "boolean"
         },
+        "temperatureUnity": {
+          "type": "string",
+          "enum": ["F", "C"]
+        },
         "temperatureValue": {
           "type": "number"
         },
@@ -83,6 +87,7 @@
       },
       "required": [
         "temperature",        
+        "temperatureUnity",        
         "muscularPain",
         "cough",
         "smellLoss",
