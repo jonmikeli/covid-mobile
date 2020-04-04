@@ -44,7 +44,7 @@ A [JSON schema](../schemas/dataSchema.json) describes all this with formalism an
  - allowed values
  - required fields
 
-## JSON Example
+## JSON data example
 
 [This](../json/data.json) is a sample of data in [JSON](../json/data.json).
 
