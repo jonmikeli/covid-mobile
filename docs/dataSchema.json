@@ -56,16 +56,16 @@
         "coughDescription": {
           "type": "string"
         },
-        "smell": {
+        "smellLoss": {
           "type": "boolean"
         },
-        "smellDescription": {
+        "smellLossDescription": {
           "type": "string"
         },
-        "taste": {
+        "tasteLoss": {
           "type": "boolean"
         },
-        "tasteDescription": {
+        "tasteLossDescription": {
           "type": "string"
         },
         "headaches": {
@@ -82,23 +82,13 @@
         }
       },
       "required": [
-        "temperature",
-        "temperatureValue",
-        "temperatureDescription",
+        "temperature",        
         "muscularPain",
-        "muscularPainLevel",
-        "muscularPainDescription",
         "cough",
-        "coughLevel",
-        "coughDescription",
-        "smell",
-        "smellDescription",
-        "taste",
-        "tasteDescription",
+        "smellLoss",
+        "tasteLoss",
         "headaches",
-        "headachesDescription",
-        "improving",
-        "other"
+        "improvingComparedToPreviousReport"
       ]
     },
     "environment": {
