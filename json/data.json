@@ -1,33 +1,35 @@
 {
-    "deviceId":"",
-    "recordDate":"20200403T22:10:05",
-    "transmissionDate":"20200403T22:10:05",
-    "age":35,
-    "gender":"male",
-    "symptoms":
-    {
-        "temperature":true,
-        "temperatureValue":10.2,
-        "temperatureDescription":"only the morning",
-        "muscularPain":false,
-        "muscularPainLevel":1,
-        "muscularPainDescription":"",
-        "cough":true,
-        "coughLevel":2,
-        "coughDescription":"",
-        "smell":false,
-        "smellDescription":"",
-        "taste":true,
-        "tasteDescription":"",
-        "headaches":true,
-        "headachesDescription":"",
-        "improving":false,
-        "other":""
+    "deviceId": "ABCDEFGHIJKLMNOP",
+    "recordDate": "ABCDEFGHIJKLMNOPQRSTU",
+    "transmissionDate": "ABCDEFGHIJKLMNOPQRSTUVWXYZABC",
+    "age": 18,
+    "gender": "female",
+    "symptoms": {
+      "temperature": false,
+      "muscularPain": false,
+      "cough": true,
+      "smellLoss": true,
+      "tasteLoss": true,
+      "headaches": false,
+      "improvingComparedToPreviousReport": 326.75,
+      "temperatureValue": 134.75,
+      "temperatureDescription": "ABCDEFGHIJKLMNOPQRSTUVWXYZAB",
+      "muscularPainLevel": 3,
+      "muscularPainDescription": "ABCDEFGHIJKLMNOPQRSTUVWXYZAB",
+      "coughLevel": 3,
+      "coughDescription": "ABCDEFGHIJKL",
+      "smellLossDescription": "ABCDEFGHIJKLMNO",
+      "tasteLossDescription": "ABCDEFGHIJKLMNOPQRSTUVW",
+      "headachesDescription": "ABCDEFGHIJKLMNOPQRSTUVWXYZABC",
+      "improving": true,
+      "other": "ABCDEFGHIJKLMNOPQRSTU"
     },
-    "environment":{
-        "housing":"",
-        "transportation":"",
-        "location":"",
-        "socialDistance":""
-    }    
-}
+    "environment": {
+      "housing": "room",
+      "transportation": "ABCDEFGHIJKLMN",
+      "location": true,
+      "socialDistance": 1,
+      "city": "ABCDEFGHIJKLMNOPQRST",
+      "country": "ABCDEFG"
+    }
+  }
