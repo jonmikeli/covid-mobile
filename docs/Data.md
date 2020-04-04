@@ -39,7 +39,10 @@ Functional description:
 
 ## JSON Schema
 
-[This](../schemas/dataSchema.json) is the corresponding [JSON schema](../schemas/dataSchema.json).
+A [JSON schema](../schemas/dataSchema.json) describes all this with formalism and additional information:
+ - formats
+ - allowed values
+ - required fields
 
 ## JSON Example
 
