@@ -135,6 +135,7 @@
     "eventHubTelemetryName": "telemetry",
 
     "storageAccountName": "[concat(variables('prefixShort'),'storagehub',variables('suffixShort'))]",
+    "storageContainerNameTelemetryData": "data",
     "storageAccountContainerFileUploadsSettings": {
       "name": "fileuploads",
       "publicAccess": "None"
@@ -193,7 +194,19 @@
                 "resourceGroup": "[variables('rgName')]"
               }
             ],
-            "storageContainers": []
+            "storageContainers": [
+              {
+                "connectionString": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts',variables('storageAccountName')),'2018-07-01').keys[0].value)]",
+                "containerName": "[variables('storageContainerNameTelemetryData')]",
+                "fileNameFormat": "{iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}",
+                "batchFrequencyInSeconds": 100,
+                "maxChunkSizeInBytes": 104857600,
+                "encoding": "json",
+                "name": "TelemetryStorageEndPoint",
+                "subscriptionId": "[variables('subscriptionId')]",
+                "resourceGroup": "[variables('rgName')]"
+              }
+            ]
           },
           "routes": [
             {
@@ -202,6 +215,15 @@
               "condition": "$body.messageType = 'data'",
               "endpointNames": [
                 "TelemetryEndPoint"
+              ],
+              "isEnabled": true
+            },
+            {
+              "name": "TelemetryStorageRoute",
+              "source": "DeviceMessages",
+              "condition": "$body.messageType = 'data'",
+              "endpointNames": [
+                "TelemetryStorageEndPoint"
               ],
               "isEnabled": true
             }
