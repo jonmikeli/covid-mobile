@@ -139,6 +139,10 @@
       "name": "data",
       "publicAccess": "None"
     },
+    "storageAccountContainerSchemaSettings": {
+      "name": "schemas",
+      "publicAccess": "Public"
+    },
     "storageAccountContainerFileUploadsSettings": {
       "name": "fileuploads",
       "publicAccess": "None"
@@ -573,6 +577,25 @@
       ],
       "properties": {
         "publicAccess": "[variables('storageAccountContainerTelemetrySettings').publicAccess]"
+      }
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+      "apiVersion": "2019-06-01",
+      "name": "[concat(variables('storageAccountName'), '/default/', variables('storageAccountContainerSchemaSettings').name)]",
+      "tags": {
+        "displayName": "Azure storage-Container creation-Schema",
+        "project": "[parameters('projectProperties').name]",
+        "feature": "[parameters('projectProperties').feature]",
+        "version": "[parameters('projectProperties').version]",
+        "environment": "[parameters('environment')]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts/blobServices', variables('storageAccountName'), 'default')]",
+        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+      ],
+      "properties": {
+        "publicAccess": "[variables('storageAccountContainerSchemaSettings').publicAccess]"
       }
     },
     {
