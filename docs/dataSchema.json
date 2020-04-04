@@ -1,0 +1,141 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "string"
+    },
+    "recordDate": {
+      "type": "string"
+    },
+    "transmissionDate": {
+      "type": "string"
+    },
+    "age": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 110
+    },
+    "gender": {
+      "type": "string",
+      "enum": ["male", "female", "other", "na"]
+    },
+    "symptoms": {
+      "type": "object",
+      "properties": {
+        "temperature": {
+          "type": "boolean"
+        },
+        "temperatureValue": {
+          "type": "number"
+        },
+        "temperatureDescription": {
+          "type": "string"
+        },
+        "muscularPain": {
+          "type": "boolean"
+        },
+        "muscularPainLevel": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "muscularPainDescription": {
+          "type": "string"
+        },
+        "cough": {
+          "type": "boolean"
+        },
+        "coughLevel": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "coughDescription": {
+          "type": "string"
+        },
+        "smell": {
+          "type": "boolean"
+        },
+        "smellDescription": {
+          "type": "string"
+        },
+        "taste": {
+          "type": "boolean"
+        },
+        "tasteDescription": {
+          "type": "string"
+        },
+        "headaches": {
+          "type": "boolean"
+        },
+        "headachesDescription": {
+          "type": "string"
+        },
+        "improving": {
+          "type": "boolean"
+        },
+        "other": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "temperature",
+        "temperatureValue",
+        "temperatureDescription",
+        "muscularPain",
+        "muscularPainLevel",
+        "muscularPainDescription",
+        "cough",
+        "coughLevel",
+        "coughDescription",
+        "smell",
+        "smellDescription",
+        "taste",
+        "tasteDescription",
+        "headaches",
+        "headachesDescription",
+        "improving",
+        "other"
+      ]
+    },
+    "environment": {
+      "type": "object",
+      "properties": {
+        "housing": {
+          "type": "string",
+          "enum": ["room", "shared appartement", "house", "shared house", "other"]
+        },
+        "transportation": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "country": {
+            "type": "string"
+          },
+        "socialDistance": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        }
+      },
+      "required": [
+        "housing",
+        "transportation",
+        "location",
+        "socialDistance"
+      ]
+    }
+  },
+  "required": [
+    "deviceId",
+    "recordDate",
+    "transmissionDate",
+    "age",
+    "gender",
+    "symptoms",
+    "environment"
+  ]
+}
