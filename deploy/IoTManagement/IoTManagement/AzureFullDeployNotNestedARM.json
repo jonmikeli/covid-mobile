@@ -141,7 +141,7 @@
     },
     "storageAccountContainerSchemaSettings": {
       "name": "schemas",
-      "publicAccess": "Public"
+      "publicAccess": "Container"
     },
     "storageAccountContainerFileUploadsSettings": {
       "name": "fileuploads",
