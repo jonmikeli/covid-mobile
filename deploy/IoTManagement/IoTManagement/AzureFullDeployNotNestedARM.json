@@ -135,7 +135,10 @@
     "eventHubTelemetryName": "telemetry",
 
     "storageAccountName": "[concat(variables('prefixShort'),'storagehub',variables('suffixShort'))]",
-    "storageContainerNameTelemetryData": "data",
+    "storageAccountContainerTelemetrySettings": {
+      "name": "data",
+      "publicAccess": "None"
+    },
     "storageAccountContainerFileUploadsSettings": {
       "name": "fileuploads",
       "publicAccess": "None"
@@ -197,7 +200,7 @@
             "storageContainers": [
               {
                 "connectionString": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts',variables('storageAccountName')),'2018-07-01').keys[0].value)]",
-                "containerName": "[variables('storageContainerNameTelemetryData')]",
+                "containerName": "[variables('storageAccountContainerTelemetrySettings').name]",
                 "fileNameFormat": "{iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}",
                 "batchFrequencyInSeconds": 100,
                 "maxChunkSizeInBytes": 104857600,
@@ -255,7 +258,8 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.EventHub/namespaces/eventhubs/authorizationRules',variables('eventHubNamespaceName'), variables('eventHubTelemetryName'), parameters('eventHubNamespaceSettings').authorizationRulesNames.send)]",
-        "[resourceId('Microsoft.Storage/storageAccounts',variables('storageAccountName'))]"
+        "[resourceId('Microsoft.Storage/storageAccounts',variables('storageAccountName'))]",
+        "[resourceId('Microsoft.Storage/storageAccounts/blobServices/containers',variables('storageAccountName'), 'default', variables('storageAccountContainerTelemetrySettings').name)]"
       ]
 
     },
@@ -553,6 +557,25 @@
       }
     },
     {
+      "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+      "apiVersion": "2019-06-01",
+      "name": "[concat(variables('storageAccountName'), '/default/', variables('storageAccountContainerTelemetrySettings').name)]",
+      "tags": {
+        "displayName": "Azure storage-Container creation-Telemetry Data",
+        "project": "[parameters('projectProperties').name]",
+        "feature": "[parameters('projectProperties').feature]",
+        "version": "[parameters('projectProperties').version]",
+        "environment": "[parameters('environment')]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts/blobServices', variables('storageAccountName'), 'default')]",
+        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+      ],
+      "properties": {
+        "publicAccess": "[variables('storageAccountContainerTelemetrySettings').publicAccess]"
+      }
+    },
+    {
       "type": "Microsoft.Web/sites",
       "kind": "api",
       "name": "[variables('apiName')]",
@@ -588,7 +611,7 @@
             "[resourceId('Microsoft.Insights/components', variables('applicationInsightsName'))]"
           ],
           "properties": {
-            "APPLICATIONINSIGHTS_CONNECTION_STRING": "[concat('@Microsoft.KeyVault(SecretUri=', reference(resourceId('Microsoft.KeyVault/vaults/secrets', variables('keyVaultName'), variables('keyVaultApplicationInsightConnectionStringKey'))).secretUriWithVersion,')')]",            
+            "APPLICATIONINSIGHTS_CONNECTION_STRING": "[concat('@Microsoft.KeyVault(SecretUri=', reference(resourceId('Microsoft.KeyVault/vaults/secrets', variables('keyVaultName'), variables('keyVaultApplicationInsightConnectionStringKey'))).secretUriWithVersion,')')]",
 
             "AzureSettings:Storage:Name": "[variables('storageAccountName')]",
             "AzureSettings:Storage:Key": "[concat('@Microsoft.KeyVault(SecretUri=', reference(resourceId('Microsoft.KeyVault/vaults/secrets', variables('keyVaultName'), variables('keyVaultStorageKeyKey'))).secretUriWithVersion,')')]",
@@ -789,6 +812,14 @@
     "storageAccountName": {
       "type": "string",
       "value": "[variables('storageAccountName')]"
+    },
+    "storageAccountKeyVaultKey": {
+      "type": "string",
+      "value": "[concat('@Microsoft.KeyVault(SecretUri=', reference(resourceId('Microsoft.KeyVault/vaults/secrets', variables('keyVaultName'), variables('keyVaultStorageKeyKey'))).secretUriWithVersion,')')]"
+    },
+    "storageAccountKeyVaultConnectionString": {
+      "type": "string",
+      "value": "[concat('@Microsoft.KeyVault(SecretUri=', reference(resourceId('Microsoft.KeyVault/vaults/secrets', variables('keyVaultName'), variables('keyVaultStorageConnectionStringKey'))).secretUriWithVersion,')')]"
     },
     "iotHubName": {
       "type": "string",
