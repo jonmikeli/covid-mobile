@@ -104,8 +104,13 @@ Most important points:
  - find a solution not intrusive but globaly expanded
  - anonymize ALL the collected data (PRIVACY IS MANDATORY)
 
-There is no business or lucrative purpose in all this.
-This pandemic is world wide. Let's just help as we can.
+> There is no business or lucrative purpose in all this.
+
+All contributions are welcomed.
+Not constructive or unethical behaviors have no room in this initiative.
+This pandemic is world wide.
+Let's just help each other as we can.
 
 ## Conditions of data use
-TO BE DEFINED
+The only purpose of this raw data is to help scientists in their labor of analyzing and understanding the impacts of Covid-19.
+No other use is allowed.
