@@ -86,7 +86,9 @@ Regarding the cloud IoT solution, there are two approaches:
  - SaaS, (ex: IoT Central) very fast to implement but with limitations in terms of features or evolutions;
  - PaaS, with more possibilities but will probably take longuer to be implemented.
 
-I have to admit that chosing SaaS approach with IoT Central was pretty tempting. However, being an Open Source project and not knowing how the project will evolve, having a more "agile" or flexible approach is maybe better, even though it requires an initial bigger effort.
+I have to admit that chosing SaaS approach with IoT Central was pretty tempting. Indeed, the cloud solution could be created really fast with scalability, dashboards, UIs and indicators.
+
+However, being an Open Source project and not knowing how the project will evolve, having a more "agile" or flexible approach would maybe be a better choice, even though it requires an initial bigger effort.
 
 This would be the overall architecture of the current version of the solution:
 
