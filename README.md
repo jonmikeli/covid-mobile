@@ -73,23 +73,24 @@ Data will be stored as raw data in cold storages.
 Once the data is at least, at that level of persistence, we can consider other solutions and data flows. For instance, the used storages could feed other data lakes, analytics or any other flow meant to process (analytics) and extract value.
 
 ## Global architecture
-The architecture of the solution would be a an IoT-oriented architecture.
-
-![IoT solution general diagram](media/IoTSolutionGeneralDiagram.png "IoT solution general diagram")
 
 ### IoT device application (client side)
 Mobile applications are mostly divided in iOS and Android applications.
 So, let's focus on that.
-Xamarin or similar solutions allowing to capitalize the development could be important to save time in the overall development process (factorization, tests, etc).
-Among the people that feel on this, keep in mind the purpose and I am sure wise choices will be made.
+
+Xamarin or similar solutions allowing to capitalize the development could be important to save time in the overall development process (development, factorization, testing, etc).
+Among the people who feel on this, keep in mind the purpose and I am sure wise choices will be made.
 
 ### IoT Solution (cloud side)
 Regarding the cloud IoT solution, there are two approaches:
- - SaaS, very fast to implement but with limitations in terms of features;
- - PaaS, with a bit more possibilities but will probably take longuer to be implemented.
+ - SaaS, (ex: IoT Central) very fast to implement but with limitations in terms of features or evolutions;
+ - PaaS, with more possibilities but will probably take longuer to be implemented.
 
-Requirements (functional and planing) will allow to make the choice.
-In the same way than the previous section, it's important to keep in mind the context and the purpose of the solution.
+I have to admit that chosing SaaS approach with IoT Central was pretty tempting. However, being an Open Source project and not knowing how the project will evolve, having a more "agile" or flexible approach is maybe better, even though it requires an initial bigger effort.
+
+This would be the overall architecture of the current version of the solution:
+
+![IoT solution general diagram](media/IoTSolutionGeneralDiagram.png "IoT solution general diagram")
 
 # Contributions
 Feel free to take part in this.
