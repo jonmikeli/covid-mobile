@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <RootNamespace>Covid19Client</RootNamespace>
+    <AssemblyName>Covid19Client</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.530" />  
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\DailyReport\FeverReportPage.xaml.cs">
+      <DependentUpon>FeverReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DailyReport\MuscularPainReportPage.xaml.cs">
+      <DependentUpon>MuscularPainReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DailyReport\OtherSymptomReportPage.xaml.cs">
+      <DependentUpon>OtherSymptomReportPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\DailyReport\DailyReportHomePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\DailyReport\EnvironmentReportPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\DailyReport\FeverReportPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\DailyReport\MuscularPainReportPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\DailyReport\OtherSymptomReportPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SettingsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>
