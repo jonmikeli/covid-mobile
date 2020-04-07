@@ -25,6 +25,17 @@
     "symptoms": {
       "type": "object",
       "properties": {
+        "breathingIssues": {
+          "type": "boolean"
+        },
+        "breathingIssuesLevel": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "breathingIssuesDescription": {
+          "type": "string"
+        },
         "temperature": {
           "type": "boolean"
         },
@@ -39,7 +50,7 @@
         },
         "muscularPainLevel": {
           "type": "integer",
-          "minimum": 1,
+          "minimum": 0,
           "maximum": 5
         },
         "muscularPainDescription": {
@@ -50,7 +61,7 @@
         },
         "coughLevel": {
           "type": "integer",
-          "minimum": 1,
+          "minimum": 0,
           "maximum": 5
         },
         "coughDescription": {
@@ -82,6 +93,7 @@
         }
       },
       "required": [
+        "breathingIssues",
         "temperature",        
         "muscularPain",
         "cough",
