@@ -1,8 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using Covid19Client.Services;
-using Covid19Client.Views;
+﻿using Xamarin.Forms;
 using Covid19Client.Views.DailyReport;
 
 namespace Covid19Client
@@ -13,8 +9,7 @@ namespace Covid19Client
         public App()
         {
             InitializeComponent();
-
-            DependencyService.Register<MockDataStore>();
+            
             MainPage = new DailyReportHomePage();
         }
 

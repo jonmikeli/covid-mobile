@@ -1,10 +1,4 @@
 ﻿using Covid19Client.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,8 +8,7 @@ namespace Covid19Client.Views.DailyReport
     public partial class SymptomsFlowPage : TabbedPage
     {
         public SymptomsFlowPage(SymptomsEnum symptomslist)
-        {
-            var listOfReportPage = new List<Page>();
+        {            
             
             if((symptomslist & SymptomsEnum.BreathingIssue)!=0)
             {
