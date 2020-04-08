@@ -14,6 +14,7 @@ namespace Covid19Client.Views.DailyReport
     {
         public EnvironmentReportPage()
         {
+            this.Title = "Environment";
             InitializeComponent();
         }
     }

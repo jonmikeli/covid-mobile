@@ -13,12 +13,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Devices.Client" Version="1.25.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.530" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\DailyReport\BreathingIssuesReportPage.xaml.cs">
+      <DependentUpon>BreathingIssuesReportPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\DailyReport\FeverReportPage.xaml.cs">
       <DependentUpon>FeverReportPage.xaml</DependentUpon>
     </Compile>
@@ -46,8 +50,15 @@
     <EmbeddedResource Update="Views\DailyReport\OtherSymptomReportPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\DailyReport\SymptomsFlowPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="IotClient\" />
   </ItemGroup>
 </Project>

@@ -14,6 +14,7 @@ namespace Covid19Client.Views.DailyReport
     {
         public FeverSymptomPage()
         {
+            this.Title = "Fever";
             InitializeComponent();
         }
     }

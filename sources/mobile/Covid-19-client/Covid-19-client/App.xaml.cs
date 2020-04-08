@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Covid19Client.Services;
 using Covid19Client.Views;
+using Covid19Client.Views.DailyReport;
 
 namespace Covid19Client
 {
@@ -14,7 +15,7 @@ namespace Covid19Client
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
-            MainPage = new MainPage();
+            MainPage = new DailyReportHomePage();
         }
 
         protected override void OnStart()

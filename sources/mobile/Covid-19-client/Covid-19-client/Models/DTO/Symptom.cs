@@ -15,6 +15,13 @@ namespace Covid19Client.Models.DTO
             // public empty ctor needed for serialization
         }
         #endregion
+        #region BreathingIssues
+        [Required()]
+        public bool BreathingIssues { get; set; }
+        [Range(1,5)]
+        public int BreathingIssuesLevel { get; set; }
+        public string BreathingIssuesDescription { get; set; }        
+        #endregion
         #region Temperature
         [Required()]
        public bool Temperature { get; set; }

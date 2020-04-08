@@ -6,10 +6,20 @@
              mc:Ignorable="d"
              x:Class="Covid19Client.Views.DailyReport.DailyReportHomePage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand">
+            <Label Text="Please start by selecting your symptoms"/>
+            <Label>Breathing issues</Label>
+            <CheckBox IsChecked="{Binding HaveBreathingIssue,Mode=TwoWay}" />
+            <Label>High temperature (fever)</Label>
+            <CheckBox IsChecked="{Binding HaveFever,Mode=TwoWay}" />
+            <Label>Muscular pain</Label>
+            <CheckBox IsChecked="{Binding HaveMuscularPain,Mode=TwoWay}" />
+            <Label>Others</Label>
+            <CheckBox IsChecked="{Binding HaveOthers,Mode=TwoWay}" />
+            <StackLayout VerticalOptions="End" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                <Button HorizontalOptions="Start"  Text="Back to menu" ></Button>
+                <Button HorizontalOptions="End" Text="Ok" Clicked="Start_Clicked"></Button>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
