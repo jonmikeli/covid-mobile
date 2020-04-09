@@ -24,7 +24,8 @@
   <!-- vertag<:>end -->
   <ItemGroup>
     <None Include="AzureCLI\0-AzFullDeployment-NotNested.sh" />
-    <None Include="AzureCLI\dev.sh" />
+    <None Include="AzureCLI\dev-tets.sh" />
+    <None Include="AzureCLI\create-iotsolution.sh" />
     <None Include="AzureFullDeploy.parameters-dev.json" />
     <None Include="AzureFullDeployNotNestedARM.json" />
     <None Include="Deployment.targets">
