@@ -6,5 +6,5 @@
 -p "@../AzureFullDeploy.parameters-dev.json" \
 -l "westeurope" \
 -e "dev" \
--f "project='IoT-COVID' module='IoTManagement' version=v0.1"
+-f "project='IoT-COVID' module='IoTSolution' version=v0.1"
 
