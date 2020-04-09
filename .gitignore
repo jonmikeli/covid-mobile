@@ -349,3 +349,4 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 /deploy/IoTSolution/IoTSolution/AzureCLI/dev-tets.sh
+deploy/IoTSolution/IoTSolution/AzureCLI/dev - Copy.sh
