@@ -20,7 +20,7 @@
     },
     "module": {
       "type": "string",
-      "allowedValues": [ "IoTManagement", "DataProcessing", "Business", "Common", "Gateway", "IdentityCore" ]
+      "allowedValues": [ "IoTSolution"]
     },
     "moduleCode": {
       "type": "string",
