@@ -33,4 +33,8 @@
     <ProjectReference Include="..\IoTSolution.API.IoC.Configuration\IoTSolution.API.IoC.Configuration.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\IoT\V2\" />
+  </ItemGroup>
+
 </Project>
