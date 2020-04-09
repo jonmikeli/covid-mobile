@@ -640,8 +640,8 @@
             "AzureSettings:Storage:Key": "[concat('@Microsoft.KeyVault(SecretUri=', reference(resourceId('Microsoft.KeyVault/vaults/secrets', variables('keyVaultName'), variables('keyVaultStorageKeyKey'))).secretUriWithVersion,')')]",
             "AzureSettings:Storage:ConnectionString": "[concat('@Microsoft.KeyVault(SecretUri=', reference(resourceId('Microsoft.KeyVault/vaults/secrets', variables('keyVaultName'), variables('keyVaultStorageConnectionStringKey'))).secretUriWithVersion,')')]",
 
-            "AzureSettings:IoTHub:Name": "[variables('iotHubName')]",
-            "AzureSettings:IoTHub:ConnectionString": "[concat('@Microsoft.KeyVault(SecretUri=', reference(resourceId('Microsoft.KeyVault/vaults/secrets', variables('keyVaultName'), variables('keyVaultIoTHubConnectionStringKey'))).secretUriWithVersion,')')]"
+            "AppSettings:IoTHub:Name": "[variables('iotHubName')]",
+            "AppSettings:IoTHub:ConnectionString": "[concat('@Microsoft.KeyVault(SecretUri=', reference(resourceId('Microsoft.KeyVault/vaults/secrets', variables('keyVaultName'), variables('keyVaultIoTHubConnectionStringKey'))).secretUriWithVersion,')')]"
           }
         }
       ],
