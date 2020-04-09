@@ -32,8 +32,6 @@
       <Visible>False</Visible>
     </None>
     <Content Include="Deploy-AzureResourceGroup.ps1" />
-    <None Include="Tests\ParameterTests.sh" />
-    <None Include="Tests\ParameterTestsLauncher.sh" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>
