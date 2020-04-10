@@ -69,7 +69,9 @@ namespace IoTSolution.API.API
                             //opt.Filters.Add(typeof(CustomFilterAttribute));
                             opt.Filters.Add(new ProducesAttribute("application/json"));
                         }
-                        ).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+                        )
+                        .AddNewtonsoftJson()
+                        .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
                     //API versioning
                     services.AddApiVersioning(

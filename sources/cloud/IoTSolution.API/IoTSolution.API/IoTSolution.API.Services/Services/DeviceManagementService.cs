@@ -279,7 +279,7 @@ namespace IoTSolution.API.Services
 
                     if (twin != null)
                     {
-                        string jsonTags = JsonConvert.SerializeObject(options.Twins, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                        string jsonTags = JsonConvert.SerializeObject(options.Twins, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, Formatting = Formatting.Indented });
                         Twin updatedTwin = await _registryManager.UpdateTwinAsync(deviceId, jsonTags, twin.ETag);
 
                         return updatedTwin != null;
