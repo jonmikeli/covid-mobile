@@ -124,7 +124,7 @@ namespace IoTSolution.API.Services
             if (result != null && result.IsSuccessful)
                 return await GetDeviceAsync(deviceId);
             else
-                throw new Exception("An error has occurred during the device creation or the twin updates.");
+                throw new Exception(JsonConvert.SerializeObject(result.Errors, Formatting.Indented));
         }
 
         public async Task<SIoT.Device> AddDeviceWithTwinAsync(string deviceId, Twin twin)
@@ -134,7 +134,7 @@ namespace IoTSolution.API.Services
             if (result != null && result.IsSuccessful)
                 return await GetDeviceAsync(deviceId);
             else
-                throw new Exception("An error has occurred during the device creation or the twin updates.");
+                throw new Exception(JsonConvert.SerializeObject(result.Errors, Formatting.Indented));
         }
 
         public async Task<string> GetPrimaryKeyOrThumbprintFromDeviceAsync(string deviceId)
