@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using IoTSolution.API.Services.Model.IoT;
 
 using Microsoft.Azure.Devices.Shared;
+using Newtonsoft.Json.Linq;
 
 namespace IoTSolution.API.Services.Contracts
 {
@@ -21,8 +22,8 @@ namespace IoTSolution.API.Services.Contracts
 
         Task<bool> UpdateDeviceSettings(string deviceId, Model.IoT.DeviceIoTSettings options);
 
-        Task<IEnumerable<JsonDocument>> GetDevicesAsync(int maxCount);
-        Task<IEnumerable<JsonDocument>> GetDevicesAsync(string query, int maxCount);
+        Task<JArray> GetDevicesAsync(int maxCount);
+        Task<JArray> GetDevicesAsync(string query, int maxCount);
 
 
 

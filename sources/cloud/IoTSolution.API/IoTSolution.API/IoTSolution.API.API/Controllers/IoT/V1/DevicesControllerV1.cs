@@ -8,9 +8,10 @@ using AutoMapper;
 using IoTSolution.API.API.DataContracts.IoT;
 using IoTSolution.API.API.DataContracts.IoT.Requests;
 using IoTSolution.API.Services.Contracts;
-
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SIoT = IoTSolution.API.Services.Model.IoT;
 
 namespace IoTSolution.API.API.Controllers.IoT.V1
@@ -41,6 +42,10 @@ namespace IoTSolution.API.API.Controllers.IoT.V1
         /// </summary>
         /// <param name="id">Device Id</param>
         /// <returns>Device entity containing device related information</returns>
+        /// <response code="200">Returns the item corresponding to the provided Id.</response>
+        /// <response code="204">If the item is null.</response>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Device))]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(Device))]
         [HttpGet("{id}")]
         public async Task<Device> GetDevice(string id)
         {
@@ -59,7 +64,7 @@ namespace IoTSolution.API.API.Controllers.IoT.V1
         /// <returns>A collection of IoT Hub's registered devices</returns>
         [HttpGet()]
         [Route("{maxCount:int?}")]
-        public async Task<IEnumerable<JsonDocument>> GetDevicesAsync(int maxCount = 100)
+        public async Task<JArray> GetDevicesAsync(int maxCount = 100)
         {
             return await _provisioningService.GetDevicesAsync(maxCount);
         }
@@ -98,18 +103,20 @@ namespace IoTSolution.API.API.Controllers.IoT.V1
         /// </remarks>
         /// <param name="value">Device provision settings</param>
         /// <returns>Device entity containing device related information</returns>
+        /// <response code="201">Returns the newly created item.</response>s
         [HttpPost]
-        [Route("add")]
-        public async Task<Device> AddDevice([FromBody]ProvisionDeviceRequest value)
+        [Route("addwithtags")]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Device))]
+        public async Task<Device> AddDeviceWithTags([FromBody]ProvisionDeviceWithTagsRequest value)
         {
             if (value == null)
-                throw new ArgumentNullException("value");
+                throw new ArgumentNullException(nameof(value));
 
             //NOTE: in this implementation, we chose to consider device options as mandatory in order to guarantee tags coherence
-            if (value.DeviceIoTSettings == null)
-                throw new ArgumentNullException("deviceIoTSettings");
+            if (value.Tags == null)
+                throw new ArgumentNullException("Tags");
 
-            var data = await _provisioningService.AddDeviceAsync(value.DeviceId, _mapper.Map<SIoT.DeviceIoTSettings>(value.DeviceIoTSettings));
+            var data = await _provisioningService.AddDeviceWithTagsAsync(value.DeviceId, JsonConvert.SerializeObject(value.Tags));
 
             if (data != null)
                 return _mapper.Map<Device>(data);
@@ -123,15 +130,20 @@ namespace IoTSolution.API.API.Controllers.IoT.V1
         /// </summary>
         /// <param name="request">Search criteria</param>
         /// <returns>Collection of devices fulfilling search criteria</returns>
+        /// <response code="200">Collection of devices fulfilling search criteria.</response>s
         [HttpPost()]
         [Route("search")]
-        public async Task<IEnumerable<JsonDocument>> SearchDevicesAsync([FromBody]SearchDevicesRequest request)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(JArray))]
+        public async Task<JArray> SearchDevicesAsync([FromBody]SearchDevicesRequest request)
         {
             if (request == null)
                 throw new ArgumentNullException("request");
 
             if (string.IsNullOrEmpty(request.Query))
                 throw new ArgumentNullException("request.Query");
+
+            if (request.MaxCount <= 0)
+                throw new ArgumentException("MaxCount has to be greater than 0.","request.MaxCount");
 
             return await _provisioningService.GetDevicesAsync(request.Query, request.MaxCount);
         }
@@ -143,8 +155,10 @@ namespace IoTSolution.API.API.Controllers.IoT.V1
         /// </summary>
         /// <param name="id">Device id</param>
         /// <returns>Device entity containing device related information (with the updated status)</returns>
+        /// <response code="200">Disabled device.</response>
         [HttpPut()]
         [Route("{id}/disable")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Device))]
         public async Task<Device> DisableDevice(string id)
         {
             var data = await _provisioningService.DisableDeviceAsync(id);
@@ -160,8 +174,10 @@ namespace IoTSolution.API.API.Controllers.IoT.V1
         /// </summary>
         /// <param name="id">Device Id</param>
         /// <returns>Device entity containing device related information</returns>
+        /// <response code="200">Disabled device.</response>
         [HttpPut()]
         [Route("{id}/enable")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Device))]
         public async Task<Device> EnableDevice(string id)
         {
             var data = await _provisioningService.EnableDeviceAsync(id);
@@ -179,7 +195,9 @@ namespace IoTSolution.API.API.Controllers.IoT.V1
         /// </summary>
         /// <param name="id">Device Id</param>
         /// <returns>Boolean illustrating if the delete action has been successful or not</returns>
+        /// <response code="200">Boolean illustrating if the delete action has been successful or not.</response>
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
         public async Task<bool> DeleteDevice(string id)
         {
             return await _provisioningService.RemoveDeviceAsync(id);

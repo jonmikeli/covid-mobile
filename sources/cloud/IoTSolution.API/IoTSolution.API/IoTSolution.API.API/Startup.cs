@@ -107,6 +107,8 @@ namespace IoTSolution.API.API
                             options.OperationFilter<SwaggerDefaultValues>();
                             options.IncludeXmlComments(XmlCommentsFilePath);
                         });
+
+                        services.AddSwaggerGenNewtonsoftSupport();
                     }
 
                     //Mappings

@@ -16,7 +16,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 using Newtonsoft.Json;
-
+using Newtonsoft.Json.Linq;
 using SIoT = IoTSolution.API.Services.Model.IoT;
 
 namespace IoTSolution.API.Services
@@ -300,12 +300,12 @@ namespace IoTSolution.API.Services
 
         #region Get devices
         //JSON Improrvements:https://devblogs.microsoft.com/dotnet/try-the-new-system-text-json-apis/
-        public async Task<IEnumerable<JsonDocument>> GetDevicesAsync(int maxCount = 100)
+        public async Task<JArray> GetDevicesAsync(int maxCount = 100)
         {
             return await GetDevicesAsync("select * from devices", maxCount);
         }
 
-        public async Task<IEnumerable<JsonDocument>> GetDevicesAsync(string query, int maxCount = 100)
+        public async Task<JArray> GetDevicesAsync(string query, int maxCount = 100)
         {
             var iotQuery = _registryManager.CreateQuery(query, maxCount);
             List<string> data = new List<string>();
@@ -315,7 +315,7 @@ namespace IoTSolution.API.Services
                 data.AddRange(await iotQuery.GetNextAsJsonAsync());
             }
 
-            return data.Select(i => JsonDocument.Parse(i));
+            return JArray.Parse(JsonConvert.SerializeObject(data, Formatting.Indented));
         }
         #endregion
         #endregion
