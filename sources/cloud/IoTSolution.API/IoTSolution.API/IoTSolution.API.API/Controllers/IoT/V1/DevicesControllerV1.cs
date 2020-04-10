@@ -62,9 +62,8 @@ namespace IoTSolution.API.API.Controllers.IoT.V1
         /// </summary>
         /// <param name="maxCount">Max number of returned items</param>
         /// <returns>A collection of IoT Hub's registered devices</returns>
-        [HttpGet()]
-        [Route("{maxCount:int?}")]
-        public async Task<JArray> GetDevicesAsync(int maxCount = 100)
+        [HttpGet()]       
+        public async Task<JArray> GetDevicesAsync([FromQuery]int maxCount = 100)
         {
             return await _provisioningService.GetDevicesAsync(maxCount);
         }
