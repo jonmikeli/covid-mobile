@@ -4,6 +4,11 @@ COVID pandemic is world wide and the impact in all our lives is being huge.
 The sooner we stop it (or find medics), the better for all of us.
 The proposed solution is only a very small contribution from the IT world, in order to help the scientific community in their very hard labor.
 
+UPDATE
+It seems that other "profession-mates" have had [similar ideas at Oracle](https://www.zdnet.com/article/launching-oracles-covid-19-therapeutic-app-the-back-story).
+We are glad to notice that they have already released a solution similar to the one this project deals with. There is no sense in releasing products fulfilling the same purpose in a context where competition is not positive and could mislead the scientific community as well as the endusers.
+That said, this project will continue to be public in order to feed other purposes (educational, collaborative in case it brings differents ideas/perspectives, etc).
+
 ## Purpose
 The purpose of the project is to build a simple solution allowing to collect and gather data related to covid-19 from all around the world.
 
