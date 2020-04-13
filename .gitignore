@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 /deploy/IoTSolution/IoTSolution/AzureCLI/dev-tets.sh
 deploy/IoTSolution/IoTSolution/AzureCLI/dev - Copy.sh
+*.local.json
