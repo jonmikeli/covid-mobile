@@ -9,7 +9,7 @@ The proposed solution is only a very small contribution from the IT world, in or
 > It seems that other "profession-mates" have had [similar ideas at Oracle](https://www.zdnet.com/article/launching-oracles-covid-19-therapeutic-app-the-back-story).
 We are glad to notice that they have already released a solution similar to the one this project deals with.
 >
->There is no sense in releasing products fulfilling the same purpose in a context where competition is not positive and could mislead the scientific community as well as the endusers.
+>There is no sense in releasing products fulfilling the same purpose in a context where competition brings no value and could even mislead the scientific community in the targetted purpose.
 That said, this project will continue to be public in order to feed other purposes (educational, collaborative in case it brings differents ideas/perspectives, etc).
 
 ## Purpose
